@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import dataV from '@jiaminghi/data-view';
+import ElementUI from 'element-ui';
 // 引入全局css
 import './assets/scss/style.scss';
 // 按需引入vue-awesome图标
@@ -25,7 +26,7 @@ Vue.config.productionTip = false;
 // 全局注册
 Vue.component('icon', Icon);
 Vue.use(dataV);
-
+Vue.use(ElementUI);
 new Vue({
   router,
   store,

@@ -8,7 +8,7 @@
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
             <div class="title">
-              <span class="title-text">大数据可视化平台</span>
+              <span class="title-text">OpenDigger开源可视化大屏</span>
               <dv-decoration-6
                 class="dv-dec-6"
                 :reverse="true"
