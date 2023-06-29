@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import dataV from '@jiaminghi/data-view';
 import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 // 引入全局css
 import './assets/scss/style.scss';
 // 按需引入vue-awesome图标
@@ -22,6 +23,7 @@ import echarts from 'echarts'
 //import * as echarts from 'echarts'
 Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false;
+
 
 // 全局注册
 Vue.component('icon', Icon);

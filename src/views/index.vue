@@ -8,7 +8,7 @@
           <div class="d-flex jc-center">
             <dv-decoration-8 class="dv-dec-8" :color="decorationColor" />
             <div class="title">
-              <span class="title-text">OpenDigger开源可视化大屏</span>
+              <span class="title-text">OpenDigger可视化大屏</span>
               <dv-decoration-6
                 class="dv-dec-6"
                 :reverse="true"
@@ -42,7 +42,22 @@
             <div class="react-right mr-4 react-l-s">
               <span class="react-after"></span>
               <span class="text"
-                >{{ dateYear }} {{ dateWeek }} {{ dateDay }}</span
+                >
+                <el-select
+                  v-model="value"
+                  filterable
+                  placeholder="请选择"
+                  @input="setCurrentRepository()"
+                >
+                  <el-option
+                    v-for="item in options"
+                    :key="item.value"
+                    :label="item.label"
+                    :value="item.label"
+                    >
+                  </el-option>
+                </el-select>
+                </span
               >
             </div>
           </div>
@@ -106,13 +121,15 @@ export default {
   mixins: [ drawMixin ],
   data() {
     return {
+      options: this.$store.state.Repositories,
       timing: null,
       loading: true,
       dateDay: null,
       dateYear: null,
       dateWeek: null,
       weekday: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
-      decorationColor: ['#568aea', '#000000']
+      decorationColor: ['#568aea', '#000000'],
+      value: ''
     }
   },
   components: {
@@ -143,6 +160,9 @@ export default {
       setTimeout(() => {
         this.loading = false
       }, 500)
+    },
+    setCurrentRepository() {
+      this.$store.commit('setCurrentRepository', this.value)
     }
   }
 }
