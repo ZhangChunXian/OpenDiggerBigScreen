@@ -1207,11 +1207,15 @@ export default new Vuex.Store({
         label: "zulip/zulip",
       },
     ],
-    currentRepository: ""
+    currentRepository: "",
+    bottomLeftData: {}
   },
   mutations: {
     setCurrentRepository(state, repository) {
       state.currentRepository = repository
+    },
+    setBottomLeftData(state, data) {
+      state.bottomLeftData = data
     }
   },
   actions: {},

@@ -6,11 +6,14 @@
 
 <script>
 import Chart from './chart.vue'
+import { mapState } from 'vuex'
+import axios from 'axios'
+
 export default {
   data () {
     return {
       cdata: {
-        category: [
+        month: [
           "市区",
           "万州",
           "江北",
@@ -45,7 +48,7 @@ export default {
           "川东",
           "检修"
         ],
-        lineData: [
+        starData: [
           18092,
           20728,
           24045,
@@ -80,7 +83,7 @@ export default {
           49521,
           32808
         ],
-        barData: [
+        forkData: [
           4600,
           5000,
           5500,
@@ -115,24 +118,60 @@ export default {
           25250,
           7500
         ],
-        rateData: []
-      }
+        issueData: []
+      },
+      d: this.$store.state
     };
   },
   components: {
     Chart,
   },
   mounted () {
-    this.setData();
   },
   methods: {
     // 根据自己的业务情况修改
-    setData () {
-      for (let i = 0; i < this.cdata.barData.length -1; i++) {
-        let rate = this.cdata.barData[i] / this.cdata.lineData[i];
-        this.cdata.rateData.push(rate.toFixed(2));
-      }
+    setBottomLeftData() {
+      this.$store.commit('setBottomLeftData', this.cdata);
     },
+    readFileToCdata() {
+      this.$store.commit('readFileToCdata', this.cdata);
+    },
+    async fetchData(path) {
+      let starResponse = await axios.get(path + '/stars.json');
+      let starData = await starResponse.data;
+      let forkResponse = await axios.get(path + '/technical_fork.json');
+      let forkData = await forkResponse.data;
+      let issueResponse = await axios.get(path + '/issues_new.json');
+      let issueData = await issueResponse.data;
+
+      // 获取所有的键
+      let starKeys = Object.keys(starData);
+      let forkKeys = Object.keys(forkData);
+      let issueKeys = Object.keys(issueData);
+
+      // 找出公共的键
+      let commonKeys = starKeys.filter(value => forkKeys.includes(value) && issueKeys.includes(value));
+
+      // 创建新的json对象
+      let data = {
+        month: commonKeys,
+        starData: commonKeys.map(key => starData[key]),
+        forkData: commonKeys.map(key => forkData[key]),
+        issueData: commonKeys.map(key => issueData[key]),
+      }
+      return data
+    }
+  },
+  computed: {
+    ...mapState(['currentRepository']),
+  },
+  watch: {
+    currentRepository: {
+      handler: async function (newVal) {
+        this.cdata = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal);
+      },
+      deep: true
+    }
   }
 };
 </script>

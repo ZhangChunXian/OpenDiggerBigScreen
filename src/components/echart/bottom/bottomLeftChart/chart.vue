@@ -12,6 +12,7 @@
 
 <script>
 import Echart from '@/common/echart'
+
 export default {
   data () {
     return {
@@ -43,7 +44,7 @@ export default {
             }
           },
           legend: {
-            data: ["已贯通", "计划贯通", "贯通率"],
+            data: ["新增fork数量", "新增star数量", "新增issue数量"],
             textStyle: {
               color: "#B4B4B4"
             },
@@ -55,7 +56,7 @@ export default {
             y: "4%"
           },
           xAxis: {
-            data: newData.category,
+            data: newData.month,
             axisLine: {
               lineStyle: {
                 color: "#B4B4B4"
@@ -92,7 +93,7 @@ export default {
           ],
           series: [
             {
-              name: "贯通率",
+              name: "新增issue数量",
               type: "line",
               smooth: true,
               showAllSymbol: true,
@@ -104,10 +105,10 @@ export default {
                   color: "#F02FC2"
                 }
               },
-              data: newData.rateData
+              data: newData.issueData
             },
             {
-              name: "已贯通",
+              name: "新增fork数量",
               type: "bar",
               barWidth: 10,
               itemStyle: {
@@ -119,10 +120,10 @@ export default {
                   ])
                 }
               },
-              data: newData.barData
+              data: newData.forkData
             },
             {
-              name: "计划贯通",
+              name: "新增star数量",
               type: "bar",
               barGap: "-100%",
               barWidth: 10,
@@ -137,7 +138,7 @@ export default {
                 }
               },
               z: -12,
-              data: newData.lineData
+              data: newData.starData
             }
           ]
         }

@@ -10,6 +10,7 @@
   "dependencies": {
     "@jiaminghi/data-view": "^2.7.3",
     "@types/echarts": "^4.4.3",
+    "axios": "^1.4.0",
     "core-js": "^3.6.4",
     "echarts": "^4.6.0",
     "element-ui": "^2.15.13",
