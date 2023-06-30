@@ -1207,7 +1207,7 @@ export default new Vuex.Store({
         label: "zulip/zulip",
       },
     ],
-    currentRepository: "",
+    currentRepository: "ant-design/ant-design",
     bottomLeftData: {}
   },
   mutations: {

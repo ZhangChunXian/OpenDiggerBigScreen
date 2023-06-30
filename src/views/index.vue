@@ -37,7 +37,7 @@
           </div>
           <div class="d-flex aside-width">
             <div class="react-right bg-color-blue mr-3">
-              <span class="text fw-b">vue-big-screen</span>
+              <span class="text fw-b">{{this.$store.state.currentRepository}}</span>
             </div>
             <div class="react-right mr-4 react-l-s">
               <span class="react-after"></span>
