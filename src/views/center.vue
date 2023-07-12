@@ -6,7 +6,7 @@
         v-for="item in titleItem"
         :key="item.title"
       >
-        <p class="ml-3 colorBlue fw-b fs-xl">{{ item.title }}</p>
+        <p class="colorWhite" style="font-size: 0.8rem">{{ item.title }}</p>
         <div>
           <dv-digital-flop
             class="dv-dig-flop ml-1 mt-2 pl-3"
@@ -50,16 +50,17 @@
 
 <script>
 import CenterChart from '@/components/echart/center/centerChartRate'
+import { mapState } from 'vuex'
+import axios from 'axios'
 
 export default {
   data() {
     return {
       titleItem: [
         {
-          title: '今年累计任务建次数',
+          title: '累计star',  // 累计star总数
           number: {
-            number: [120],
-            toFixed: 1,
+            number: [108380],
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -68,10 +69,9 @@ export default {
           }
         },
         {
-          title: '本月累计任务次数',
+          title: '累计fork',  // 累计fork总数
           number: {
-            number: [18],
-            toFixed: 1,
+            number: [49195],
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -80,10 +80,9 @@ export default {
           }
         },
         {
-          title: '今日累计任务次数',
+          title: '累计参与人数', // 累计
           number: {
-            number: [2],
-            toFixed: 1,
+            number: [38251],
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -92,10 +91,9 @@ export default {
           }
         },
         {
-          title: '今年失败任务次数',
+          title: '累计PR',
           number: {
-            number: [14],
-            toFixed: 1,
+            number: [13208],
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -104,10 +102,9 @@ export default {
           }
         },
         {
-          title: '今年成功任务次数',
+          title: '累计issue',
           number: {
-            number: [106],
-            toFixed: 1,
+            number: [25832],
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -116,10 +113,9 @@ export default {
           }
         },
         {
-          title: '今年达标任务个数',
+          title: '累计贡献者',
           number: {
-            number: [100],
-            toFixed: 1,
+            number: [1890],
             textAlign: 'left',
             content: '{nt}',
             style: {
@@ -215,6 +211,62 @@ export default {
   },
   components: {
     CenterChart
+  },
+  computed: {
+    ...mapState(['currentRepository']),
+  },
+  watch: {
+    currentRepository: {
+      handler: async function (newVal) {
+        this.cdata = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal);
+      },
+      deep: true
+    },
+    titleItem: {
+      deep: true, // 深度监听
+      handler() {
+        this.$forceUpdate(); // 强制组件重新渲染
+      },
+    },
+  },
+  methods: {
+    async fetchData(path) {
+      let sumArray = [];
+      let allStarResponse = await axios.get(path + '/stars.json');
+      let allStarData = await allStarResponse.data;
+      let allStar = Object.values(allStarData).reduce((a, b) => a + b, 0);
+      sumArray.push(allStar);
+
+      let allForkResponse = await axios.get(path + '/technical_fork.json');
+      let allForkData = await allForkResponse.data;
+      let allFork = Object.values(allForkData).reduce((a, b) => a + b, 0);
+      sumArray.push(allFork);
+
+      let allParticipantResponse = await axios.get(path + '/participants.json');
+      let allParticipantData = await allParticipantResponse.data;
+      let allParticipant = Object.values(allParticipantData).reduce((a, b) => a + b, 0);
+      sumArray.push(allParticipant);
+
+      let allPResponse = await axios.get(path + '/change_requests.json');
+      let allPRData = await allPResponse.data;
+      let allPR = Object.values(allPRData).reduce((a, b) => a + b, 0);
+      sumArray.push(allPR);
+
+      let allIssueResponse = await axios.get(path + '/issues_new.json');
+      let allIssueData = await allIssueResponse.data;
+      let allIssue = Object.values(allIssueData).reduce((a, b) => a + b, 0);
+      sumArray.push(allIssue);
+
+      let allDistributorResponse = await axios.get(path + '/new_contributors.json');
+      let allDistributorResponseData = await allDistributorResponse.data;
+      let allDistributor = Object.values(allDistributorResponseData).reduce((a, b) => a + b, 0);
+      sumArray.push(allDistributor);
+
+      this.titleItem.forEach((item, index) => {
+        this.$set(this.titleItem[index], 'number', {number: [sumArray[index]], textAlign: 'left', content: '{nt}', style: {fontSize: 26}});
+      });
+      return sumArray;
+    }
   }
 }
 </script>

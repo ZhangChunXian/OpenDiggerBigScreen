@@ -108,18 +108,21 @@ export default {
               fontSize: 16
             },
             top: 50,
-            left: 80
+            left: 60
           },
           visualMap: {
             min: 0,
             max: 30,
+            type: 'piecewise',
+            orient: 'horizontal',
+            calculable: true,
             inRange: {
               color: ['#98FB98', '#32CD32', '#008000', '#006400', '#004d00']
             },
             show: false
           },
           calendar: {
-            cellSize: [14, 14],
+            cellSize: [16, 9],
             range: [newData['thatday'], newData['EndOfThatdayYear']],
             itemStyle: {
               borderColor: '#ebedf0',
@@ -127,14 +130,24 @@ export default {
             },
             top: '50%', // 调整热力图的位置到下半部分
             bottom: '10%',
-            left: "10%",
+            left: 'center',
             splitLine: {
               show: false
             },
-            yearLabel: { show: false }
+            yearLabel: { show: false },
+            dayLabel: { // 设置日期文本样式
+              textStyle: {
+                color: '#fff', // 文本颜色为白色
+              }
+            },
+            monthLabel: { // 设置月份文本样式
+              textStyle: {
+                color: '#fff', // 文本颜色为白色
+              }
+            }
           },
           legend: {
-            top: 120,
+            top: 100,
             left: 80,
             orient: 'vertical',
             itemGap: 15,
@@ -143,15 +156,19 @@ export default {
             data: ['年度活跃值'],
             textStyle: {
               color: '#fff',
-              fontSize: 14
+              fontSize: 28
             }
           },
           tooltip: {
-            trigger: 'item'
+            trigger: 'item',
+            position: 'top',
+            formatter: function(params) {
+            return '日期：' + params.value[0] + '<br/>活跃度：' + params.value[1];
+            }
           },
           radar: {
-            center: ['68%', '27%'],
-            radius: '40%',
+            center: ['60%', '27%'],
+            radius: '30%',
             name: {
               color: '#fff'
             },
@@ -195,7 +212,7 @@ export default {
                   name: '年度活跃值',
                   itemStyle: {
                     normal: {
-                      color: 'rgba(248,211,81, 0.2)'
+                      color: 'rgba(248,211,81)'
                     }
                   },
                   lineStyle: {
