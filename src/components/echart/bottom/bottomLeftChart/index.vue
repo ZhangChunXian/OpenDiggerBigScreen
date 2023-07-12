@@ -411,13 +411,6 @@ export default {
   mounted () {
   },
   methods: {
-    // 根据自己的业务情况修改
-    setBottomLeftData() {
-      this.$store.commit('setBottomLeftData', this.cdata);
-    },
-    readFileToCdata() {
-      this.$store.commit('readFileToCdata', this.cdata);
-    },
     async fetchData(path) {
       let starResponse = await axios.get(path + '/stars.json');
       let starData = await starResponse.data;
@@ -451,7 +444,6 @@ export default {
     currentRepository: {
       handler: async function (newVal) {
         this.cdata = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal);
-        console.log(this.cdata)
       },
       deep: true
     }

@@ -1,11 +1,6 @@
 <template>
   <div>
-    <Echart
-      :options="options"
-      id="centreLeft1Chart"
-      height="480px"
-      width="100%"
-    ></Echart>
+    <Echart :options="options" id="centreLeft1Chart" height="480px" width="100%"></Echart>
   </div>
 </template>
 
@@ -108,13 +103,35 @@ export default {
               fontSize: 24,
               fontWeight: 'normal'
             },
-            subtext: newData.year + '/' + newData.weekCategory[6],
             subtextStyle: {
               color: '#fff',
               fontSize: 16
             },
             top: 50,
             left: 80
+          },
+          visualMap: {
+            min: 0,
+            max: 30,
+            inRange: {
+              color: ['#98FB98', '#32CD32', '#008000', '#006400', '#004d00']
+            },
+            show: false
+          },
+          calendar: {
+            cellSize: [14, 14],
+            range: [newData['thatday'], newData['EndOfThatdayYear']],
+            itemStyle: {
+              borderColor: '#ebedf0',
+              borderWidth: 4
+            },
+            top: '50%', // 调整热力图的位置到下半部分
+            bottom: '10%',
+            left: "10%",
+            splitLine: {
+              show: false
+            },
+            yearLabel: { show: false }
           },
           legend: {
             top: 120,
@@ -123,7 +140,7 @@ export default {
             itemGap: 15,
             itemWidth: 12,
             itemHeight: 12,
-            data: ['平均指标', '我的指标'],
+            data: ['年度活跃值'],
             textStyle: {
               color: '#fff',
               fontSize: 14
@@ -161,82 +178,24 @@ export default {
                 shadowOffsetY: 5
               }
             },
-            indicator: [
-              {
-                name: '服务态度',
-                max: newData.maxData
-              },
-              {
-                name: '产品质量',
-                max: 10
-              },
-              {
-                name: '任务效率',
-                max: 12
-              },
-              {
-                name: '售后保障',
-                max: 3.5
-              }
-            ]
-          },
-          grid: {
-            left: 90,
-            right: 80,
-            bottom: 40,
-            top: '60%'
-          },
-          xAxis: {
-            type: 'category',
-            position: 'bottom',
-            axisLine: true,
-            axisLabel: {
-              color: 'rgba(255,255,255,.8)',
-              fontSize: 12
-            },
-            data: newData.weekCategory
-          },
-          // 下方Y轴
-          yAxis: {
-            name: '工单',
-            nameLocation: 'end',
-            nameGap: 24,
-            nameTextStyle: {
-              color: 'rgba(255,255,255,.5)',
-              fontSize: 14
-            },
-            max: newData.maxData,
-            splitNumber: 4,
-
-            axisLine: {
-              lineStyle: {
-                opacity: 0
-              }
-            },
-            splitLine: {
-              show: true,
-              lineStyle: {
-                color: '#fff',
-                opacity: 0.1
-              }
-            },
-            axisLabel: {
-              color: 'rgba(255,255,255,.8)',
-              fontSize: 12
-            }
+            indicator: newData.indicator
           },
           series: [
             {
-              name: '',
+              type: 'heatmap',
+              coordinateSystem: 'calendar',
+              data: newData['filterYearData']
+            },
+            {
               type: 'radar',
               symbolSize: 0,
               data: [
                 {
-                  value: newData.radarDataAvg[6],
-                  name: '平均指标',
+                  value: newData.radarDataAvg,
+                  name: '年度活跃值',
                   itemStyle: {
                     normal: {
-                      color: '#f8d351'
+                      color: 'rgba(248,211,81, 0.2)'
                     }
                   },
                   lineStyle: {
@@ -246,107 +205,17 @@ export default {
                   },
                   areaStyle: {
                     normal: {
-                      color: '#f8d351',
+                      color: 'rgba(248,211,81, 0.7)',
                       shadowBlur: 25,
-                      shadowColor: 'rgba(248,211,81,.3)',
+                      shadowColor: 'rgba(248,211,81)',
                       shadowOffsetX: 0,
                       shadowOffsetY: -10,
                       opacity: 1
                     }
                   }
-                },
-                {
-                  value: newData.radarData[6],
-                  name: '我的指标',
-                  itemStyle: {
-                    normal: {
-                      color: '#43dfa2'
-                    }
-                  },
-                  lineStyle: {
-                    normal: {
-                      opacity: 0
-                    }
-                  },
-                  areaStyle: {
-                    normal: {
-                      color: this.colorList.linearGtoB,
-                      shadowBlur: 15,
-                      shadowColor: 'rgba(0,0,0,.2)',
-                      shadowOffsetX: 0,
-                      shadowOffsetY: 5,
-                      opacity: 0.8
-                    }
-                  }
                 }
               ]
             },
-            {
-              name: '',
-              type: 'line',
-              smooth: true,
-              symbol: 'emptyCircle',
-              symbolSize: 8,
-              itemStyle: {
-                normal: {
-                  color: '#fff'
-                }
-              },
-              lineStyle: {
-                normal: {
-                  color: this.colorList.linearBtoG,
-                  width: 3
-                }
-              },
-              areaStyle: {
-                normal: {
-                  color: this.colorList.areaBtoG
-                }
-              },
-              data: newData.weekLineData,
-              lineSmooth: true,
-              markLine: {
-                silent: true,
-                data: [
-                  {
-                    type: 'average',
-                    name: '平均值'
-                  }
-                ],
-                precision: 0,
-                label: {
-                  normal: {
-                    formatter: '平均值: \n {c}'
-                  }
-                },
-                lineStyle: {
-                  normal: {
-                    color: 'rgba(248,211,81,.7)'
-                  }
-                }
-              },
-              tooltip: {
-                position: 'top',
-                formatter: '{c} m',
-                backgroundColor: 'rgba(28,152,232,.2)',
-                padding: 6
-              }
-            },
-            {
-              name: '占位背景',
-              type: 'bar',
-              itemStyle: {
-                normal: {
-                  show: true,
-                  color: '#000',
-                  opacity: 0
-                }
-              },
-              silent: true,
-              barWidth: '50%',
-              data: newData.weekMaxData,
-              animation: false
-            }
           ]
         }
       },

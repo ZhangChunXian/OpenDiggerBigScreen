@@ -12,6 +12,7 @@
     "@types/echarts": "^4.4.3",
     "axios": "^1.4.0",
     "core-js": "^3.6.4",
+    "dayjs": "^1.11.9",
     "echarts": "^4.6.0",
     "element-ui": "^2.15.13",
     "vue": "^2.6.11",
