@@ -2,10 +2,7 @@
   <div id="centerRight2">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
-        <span>
-          <icon name="align-left" class="text-icon"></icon>
-        </span>
-        <span class="fs-xl text mx-2">产品销售渠道分析</span>
+        <span class="text" style="font-size: 0.8rem">贡献者邮箱</span>
       </div>
       <div class="d-flex ai-center flex-column body-box">
         <dv-capsule-chart class="dv-cap-chart" :config="config" />

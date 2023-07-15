@@ -1,17 +1,10 @@
 <template>
   <div id="center">
     <div class="up">
-      <div
-        class="bg-color-black item"
-        v-for="item in titleItem"
-        :key="item.title"
-      >
+      <div class="bg-color-black item" v-for="item in titleItem" :key="item.title">
         <p class="colorWhite" style="font-size: 0.8rem">{{ item.title }}</p>
         <div>
-          <dv-digital-flop
-            class="dv-dig-flop ml-1 mt-2 pl-3"
-            :config="item.number"
-          />
+          <dv-digital-flop class="dv-dig-flop ml-1 mt-2 pl-3" :config="item.number" />
         </div>
       </div>
     </div>
@@ -24,22 +17,6 @@
         <dv-scroll-ranking-board class="dv-scr-rank-board mt-1" :config="ranking" />
       </div>
       <div class="percent">
-        <div class="item bg-color-black">
-          <span>今日任务通过率</span>
-          <CenterChart
-            :id="rate[0].id"
-            :tips="rate[0].tips"
-            :colorObj="rate[0].colorData"
-          />
-        </div>
-        <div class="item bg-color-black">
-          <span>今日任务达标率</span>
-          <CenterChart
-            :id="rate[1].id"
-            :tips="rate[1].tips"
-            :colorObj="rate[1].colorData"
-          />
-        </div>
         <div class="water">
           <dv-water-level-pond class="dv-wa-le-po" :config="water" />
         </div>
@@ -49,13 +26,342 @@
 </template>
 
 <script>
-import CenterChart from '@/components/echart/center/centerChartRate'
 import { mapState } from 'vuex'
 import axios from 'axios'
 
 export default {
   data() {
     return {
+      projects: [
+        { "name": "AdguardTeam/AdguardFilters", "value": 503.27, "top": 12 },
+        { "name": "airbytehq/airbyte", "value": 516.51, "top": 11 },
+        { "name": "alibaba/nacos", "value": 158.31, "top": 85 },
+        { "name": "angular/angular", "value": 318.03, "top": 33 },
+        { "name": "angular/components", "value": 154.86, "top": 86 },
+        { "name": "ankidroid/Anki-Android", "value": 164.76, "top": 83 },
+        { "name": "ansible/ansible", "value": 153.08, "top": 87 },
+        { "name": "ant-design/ant-design", "value": 457.75, "top": 15 },
+        { "name": "apache/airflow", "value": 466.09, "top": 14 },
+        { "name": "apache/apisix", "value": 141.47, "top": 91 },
+        { "name": "apache/arrow", "value": 260.04, "top": 48 },
+        { "name": "apache/beam", "value": 200.25, "top": 68 },
+        { "name": "apache/dolphinscheduler", "value": 132.81, "top": 93 },
+        { "name": "apache/doris", "value": 276.98, "top": 43 },
+        { "name": "apache/flink", "value": 162.25, "top": 84 },
+        { "name": "apache/hudi", "value": 249.36, "top": 51 },
+        { "name": "apache/iceberg", "value": 208.44, "top": 63 },
+        { "name": "apache/pulsar", "value": 171.45, "top": 81 },
+        { "name": "apache/shardingsphere", "value": 241.28, "top": 53 },
+        { "name": "apache/spark", "value": 283.96, "top": 41 },
+        { "name": "apache/superset", "value": 307.13, "top": 36 },
+        { "name": "apache/tvm", "value": 169.57, "top": 82 },
+        { "name": "apple/swift", "value": 272.29, "top": 45 },
+        { "name": "appsmithorg/appsmith", "value": 274.34, "top": 44 },
+        { "name": "archway-network/testnets", "value": 22.03, "top": 99 },
+        { "name": "ArduPilot/ardupilot", "value": 200.75, "top": 67 },
+        { "name": "argoproj/argo-cd", "value": 254.2, "top": 49 },
+        { "name": "AUTOMATIC1111/stable-diffusion-webui", "value": 736.73, "top": 7 },
+        { "name": "Automattic/jetpack", "value": 186.14, "top": 73 },
+        { "name": "Automattic/wp-calypso", "value": 430.83, "top": 17 },
+        { "name": "aws/aws-cdk", "value": 406.68, "top": 20 },
+        { "name": "aws-amplify/amplify-cli", "value": 196.36, "top": 69 },
+        { "name": "azerothcore/azerothcore-wotlk", "value": 173.01, "top": 81 },
+        { "name": "Azure/azure-cli", "value": 335.08, "top": 30 },
+        { "name": "Azure/azure-powershell", "value": 182.96, "top": 76 },
+        { "name": "Azure/azure-rest-api-specs", "value": 349.13, "top": 26 },
+        { "name": "Azure/azure-sdk-for-java", "value": 251.87, "top": 50 },
+        { "name": "Azure/azure-sdk-for-js", "value": 148.32, "top": 88 },
+        { "name": "Azure/azure-sdk-for-net", "value": 392.95, "top": 21 },
+        { "name": "Azure/azure-sdk-for-python", "value": 298.87, "top": 38 },
+        { "name": "backstage/backstage", "value": 319.16, "top": 32 },
+        { "name": "bevyengine/bevy", "value": 224.19, "top": 58 },
+        { "name": "bioconda/bioconda-recipes", "value": 193.52, "top": 71 },
+        { "name": "bitcoin/bitcoin", "value": 204.18, "top": 65 },
+        { "name": "bitnami/charts", "value": 175.59, "top": 79 },
+        { "name": "brave/brave-browser", "value": 215.72, "top": 60 },
+        { "name": "brave/brave-core", "value": 336.61, "top": 29 },
+        { "name": "ccxt/ccxt", "value": 256.69, "top": 48 },
+        { "name": "ceph/ceph", "value": 261.54, "top": 46 },
+        { "name": "Chia-Network/chia-blockchain", "value": 158.08, "top": 85 },
+        { "name": "cilium/cilium", "value": 262.34, "top": 46 },
+        { "name": "CleverRaven/Cataclysm-DDA", "value": 367.54, "top": 24 },
+        { "name": "ClickHouse/ClickHouse", "value": 532.52, "top": 10 },
+        { "name": "cloudflare/cloudflare-docs", "value": 203.1, "top": 66 },
+        { "name": "cms-sw/cmssw", "value": 206.77, "top": 64 },
+        { "name": "cockroachdb/cockroach", "value": 297.63, "top": 38 },
+        { "name": "conan-io/conan-center-index", "value": 337.11, "top": 28 },
+        { "name": "conda-forge/staged-recipes", "value": 195.86, "top": 69 },
+        { "name": "containers/podman", "value": 212.28, "top": 62 },
+        { "name": "coolsnowwolf/lede", "value": 100.41, "top": 97 },
+        { "name": "cypress-io/cypress", "value": 482.59, "top": 13 },
+        { "name": "darktable-org/darktable", "value": 175.38, "top": 79 },
+        { "name": "DataDog/datadog-agent", "value": 214.94, "top": 60 },
+        { "name": "dbeaver/dbeaver", "value": 307.54, "top": 35 },
+        { "name": "DefinitelyTyped/DefinitelyTyped", "value": 332.39, "top": 31 },
+        { "name": "demisto/content", "value": 179.89, "top": 77 },
+        { "name": "denoland/deno", "value": 226.04, "top": 57 },
+        {
+          "name": "department-of-veterans-affairs/va.gov-team",
+          "value": 260.73,
+          "top": 47
+        },
+        { "name": "desktop/desktop", "value": 178.32, "top": 78 },
+        { "name": "directus/directus", "value": 173.76, "top": 80 },
+        { "name": "docker/docs", "value": 207.68, "top": 64 },
+        { "name": "dotnet/aspnetcore", "value": 423.47, "top": 18 },
+        { "name": "dotnet/AspNetCore.Docs", "value": 151.4, "top": 88 },
+        { "name": "dotnet/docs", "value": 197.66, "top": 69 },
+        { "name": "dotnet/efcore", "value": 183.46, "top": 75 },
+        { "name": "dotnet/maui", "value": 504.94, "top": 11 },
+        { "name": "dotnet/roslyn", "value": 449.74, "top": 15 },
+        { "name": "dotnet/runtime", "value": 1173.57, "top": 3 },
+        { "name": "education/GitHubGraduation-2022", "value": 4.44, "top": 100 },
+        { "name": "elastic/elasticsearch", "value": 383.38, "top": 22 },
+        { "name": "elastic/kibana", "value": 825.23, "top": 5 },
+        { "name": "electron/electron", "value": 230.83, "top": 56 },
+        { "name": "element-fi/elf-council-frontend", "value": 308.25, "top": 35 },
+        { "name": "element-plus/element-plus", "value": 229.08, "top": 56 },
+        { "name": "elementor/elementor", "value": 600.48, "top": 9 },
+        { "name": "envoyproxy/envoy", "value": 339.98, "top": 28 },
+        { "name": "espressif/esp-idf", "value": 248.62, "top": 51 },
+        { "name": "ethereum/ethereum-org-website", "value": 189.82, "top": 72 },
+        { "name": "Expensify/App", "value": 409.36, "top": 19 },
+        { "name": "expo/expo", "value": 580.6, "top": 9 },
+        { "name": "facebook/react", "value": 203.52, "top": 65 },
+        { "name": "facebook/react-native", "value": 432.47, "top": 17 },
+        {
+          "name": "filecoin-project/filecoin-plus-large-datasets",
+          "value": 291.26,
+          "top": 39
+        },
+        { "name": "files-community/Files", "value": 250.92, "top": 51 },
+        { "name": "firebase/firebase-android-sdk", "value": 161.53, "top": 85 },
+        { "name": "firebase/flutterfire", "value": 141.98, "top": 90 },
+        {
+          "name": "firstcontributions/first-contributions",
+          "value": 790.77,
+          "top": 6
+        },
+        { "name": "flathub/flathub", "value": 163.48, "top": 84 },
+        { "name": "flutter/engine", "value": 442.42, "top": 16 },
+        { "name": "flutter/flutter", "value": 1534.97, "top": 2 },
+        { "name": "flutter/plugins", "value": 112.35, "top": 96 },
+        { "name": "flybywiresim/a32nx", "value": 99.67, "top": 97 },
+        { "name": "freddier/hyperblog", "value": 147.71, "top": 89 },
+        { "name": "gatsbyjs/gatsby", "value": 99.26, "top": 98 },
+        { "name": "gentoo/gentoo", "value": 287.38, "top": 40 },
+        { "name": "getsentry/sentry", "value": 389.4, "top": 21 },
+        { "name": "github/codeql", "value": 193.54, "top": 71 },
+        { "name": "github/docs", "value": 189.05, "top": 72 },
+        { "name": "gitpod-io/gitpod", "value": 239.86, "top": 53 },
+        { "name": "go-gitea/gitea", "value": 325.24, "top": 31 },
+        { "name": "godotengine/godot", "value": 1158.5, "top": 3 },
+        { "name": "golang/go", "value": 437.67, "top": 16 },
+        { "name": "google/it-cert-automation-practice", "value": 890.45, "top": 5 },
+        { "name": "google-test/signclav2-probe-repo", "value": 100.97, "top": 97 },
+        { "name": "GoogleChrome/developer.chrome.com", "value": 210.5, "top": 62 },
+        { "name": "gradle/gradle", "value": 299.95, "top": 37 },
+        { "name": "grafana/grafana", "value": 900.29, "top": 4 },
+        { "name": "grafana/loki", "value": 214.75, "top": 60 },
+        { "name": "gravitational/teleport", "value": 284.12, "top": 41 },
+        { "name": "grpc/grpc", "value": 208.07, "top": 63 },
+        { "name": "hashicorp/terraform-provider-aws", "value": 402.51, "top": 20 },
+        { "name": "hashicorp/terraform-provider-azurerm", "value": 407.3, "top": 19 },
+        { "name": "hashicorp/vault", "value": 253.4, "top": 49 },
+        { "name": "helium/denylist", "value": 48.42, "top": 98 },
+        { "name": "helix-editor/helix", "value": 231.01, "top": 55 },
+        { "name": "home-assistant/core", "value": 2387.11, "top": 1 },
+        { "name": "home-assistant/frontend", "value": 216.04, "top": 59 },
+        { "name": "home-assistant/home-assistant.io", "value": 286.29, "top": 40 },
+        { "name": "Homebrew/homebrew-cask", "value": 368.08, "top": 23 },
+        { "name": "Homebrew/homebrew-core", "value": 617.96, "top": 8 },
+        { "name": "huggingface/transformers", "value": 503.12, "top": 12 },
+        {
+          "name": "idsb3t1/KEEP-pipeline-tests-resources",
+          "value": 253.27,
+          "top": 49
+        },
+        { "name": "influxdata/telegraf", "value": 135.17, "top": 92 },
+        { "name": "IntelRealSense/librealsense", "value": 174.57, "top": 80 },
+        { "name": "istio/istio", "value": 288.34, "top": 40 },
+        { "name": "JacksonKearl/testissues", "value": 1.28, "top": 100 },
+        { "name": "JetBrains/swot", "value": 335.15, "top": 29 },
+        { "name": "jitsi/jitsi-meet", "value": 114.29, "top": 95 },
+        { "name": "jlord/patchwork", "value": 440.22, "top": 16 },
+        { "name": "joomla/joomla-cms", "value": 242.8, "top": 52 },
+        { "name": "JuliaLang/julia", "value": 194.26, "top": 70 },
+        { "name": "JuliaRegistries/General", "value": 208.2, "top": 63 },
+        { "name": "Kaiserreich/Kaiserreich-4", "top": 1 },
+        { "name": "keycloak/keycloak", "value": 419.8, "top": 19 },
+        { "name": "Koenkk/zigbee2mqtt", "value": 382.43, "top": 23 },
+        { "name": "kubernetes/kubernetes", "value": 1016.81, "top": 4 },
+        { "name": "kubernetes/minikube", "value": 153.8, "top": 86 },
+        { "name": "kubernetes/test-infra", "value": 124.72, "top": 94 },
+        { "name": "kubernetes/website", "value": 479.63, "top": 13 },
+        { "name": "kubevirt/kubevirt", "value": 163.51, "top": 83 },
+        { "name": "laravel/framework", "value": 218.89, "top": 59 },
+        { "name": "leanprover-community/mathlib", "value": 101.73, "top": 96 },
+        { "name": "LeetCode-Feedback/LeetCode-Feedback", "value": 473.56, "top": 14 },
+        { "name": "lensapp/lens", "value": 141.09, "top": 92 },
+        { "name": "Lightning-AI/lightning", "value": 246.18, "top": 52 },
+        { "name": "llvm/llvm-project", "value": 338.95, "top": 28 },
+        { "name": "logseq/logseq", "value": 228.25, "top": 56 },
+        { "name": "macports/macports-ports", "value": 153.29, "top": 87 },
+        { "name": "magento/magento2", "value": 286.05, "top": 41 },
+        { "name": "MarlinFirmware/Marlin", "value": 170.75, "top": 82 },
+        { "name": "mastodon/mastodon", "value": 260.1, "top": 47 },
+        { "name": "matplotlib/matplotlib", "value": 169.69, "top": 82 },
+        { "name": "matrix-org/synapse", "value": 141.2, "top": 91 },
+        { "name": "mattermost/mattermost-webapp", "value": 117.57, "top": 95 },
+        { "name": "mdn/content", "value": 536.61, "top": 10 },
+        { "name": "mdn/translated-content", "value": 314.42, "top": 34 },
+        { "name": "metabase/metabase", "value": 295.44, "top": 39 },
+        { "name": "MetaMask/eth-phishing-detect", "value": 279.85, "top": 42 },
+        { "name": "MetaMask/metamask-extension", "value": 259.86, "top": 48 },
+        { "name": "metersphere/metersphere", "value": 236.87, "top": 53 },
+        { "name": "microsoft/azuredatastudio", "value": 234.11, "top": 55 },
+        { "name": "microsoft/fluentui", "value": 300.89, "top": 37 },
+        { "name": "microsoft/onnxruntime", "value": 315.24, "top": 33 },
+        { "name": "microsoft/playwright", "value": 528.94, "top": 11 },
+        { "name": "microsoft/PowerToys", "value": 784.08, "top": 6 },
+        { "name": "microsoft/terminal", "value": 221.61, "top": 58 },
+        { "name": "microsoft/TypeScript", "value": 458.4, "top": 15 },
+        { "name": "microsoft/vcpkg", "value": 460.99, "top": 14 },
+        { "name": "microsoft/vscode", "value": 1954.14, "top": 1 },
+        { "name": "microsoft/vscode-jupyter", "value": 164.84, "top": 83 },
+        { "name": "microsoft/winget-pkgs", "value": 1054.29, "top": 3 },
+        { "name": "microsoft/WSL", "value": 325.16, "top": 32 },
+        { "name": "MicrosoftDocs/azure-docs", "value": 1259.5, "top": 2 },
+        { "name": "MicrosoftDocs/microsoft-365-docs", "value": 236.38, "top": 54 },
+        { "name": "MicrosoftDocs/msteams-docs", "value": 207.33, "top": 64 },
+        { "name": "microsoftgraph/microsoft-graph-docs", "value": 326.83, "top": 31 },
+        { "name": "mlflow/mlflow", "value": 163.18, "top": 84 },
+        { "name": "mozilla-mobile/fenix", "value": 116.9, "top": 95 },
+        { "name": "mrdoob/three.js", "value": 145.13, "top": 89 },
+        { "name": "mui/material-ui", "value": 424.56, "top": 18 },
+        { "name": "mui/mui-x", "value": 342.87, "top": 27 },
+        { "name": "neovim/neovim", "value": 283.26, "top": 42 },
+        { "name": "newrelic/docs-website", "value": 201.25, "top": 66 },
+        { "name": "nextcloud/desktop", "value": 134.03, "top": 93 },
+        { "name": "nextcloud/server", "value": 365.15, "top": 24 },
+        { "name": "NixOS/nixpkgs", "value": 2080.5, "top": 1 },
+        { "name": "nodejs/node", "value": 429.3, "top": 18 },
+        { "name": "nrfconnect/sdk-nrf", "value": 236.29, "top": 54 },
+        { "name": "nrwl/nx", "value": 432.99, "top": 17 },
+        { "name": "nuxt/framework", "value": 19.68, "top": 99 },
+        { "name": "o3de/o3de", "value": 132.43, "top": 93 },
+        { "name": "obsproject/obs-studio", "value": 201.04, "top": 67 },
+        { "name": "odoo/odoo", "value": 877.05, "top": 5 },
+        { "name": "open-mmlab/mmdetection", "value": 144.41, "top": 90 },
+        {
+          "name": "open-telemetry/opentelemetry-collector-contrib",
+          "value": 253.01,
+          "top": 50
+        },
+        { "name": "OpenAPITools/openapi-generator", "value": 185.39, "top": 73 },
+        { "name": "opencv/opencv", "value": 179.59, "top": 77 },
+        { "name": "openhab/openhab-addons", "value": 209.36, "top": 62 },
+        { "name": "openjdk/jdk", "value": 336.81, "top": 29 },
+        { "name": "openjournals/joss-reviews", "value": 325.18, "top": 32 },
+        { "name": "openshift/openshift-docs", "value": 495.24, "top": 12 },
+        { "name": "openshift/release", "value": 313.77, "top": 34 },
+        { "name": "openssl/openssl", "value": 251.17, "top": 50 },
+        { "name": "openvinotoolkit/openvino", "value": 308.39, "top": 35 },
+        { "name": "openwrt/openwrt", "value": 304.34, "top": 37 },
+        { "name": "oppia/oppia", "value": 201.01, "top": 67 },
+        { "name": "PaddlePaddle/Paddle", "value": 615.23, "top": 8 },
+        { "name": "PaddlePaddle/PaddleOCR", "value": 198.58, "top": 68 },
+        { "name": "pandas-dev/pandas", "value": 400.28, "top": 20 },
+        { "name": "php/php-src", "value": 175.96, "top": 78 },
+        { "name": "pingcap/tidb", "value": 227.63, "top": 57 },
+        { "name": "PixelExperience/android-issues", "value": 183.33, "top": 75 },
+        { "name": "postmanlabs/postman-app-support", "value": 185.25, "top": 74 },
+        { "name": "PowerShell/PowerShell", "value": 193.32, "top": 71 },
+        { "name": "ppy/osu", "value": 186.75, "top": 72 },
+        { "name": "PrestaShop/PrestaShop", "value": 348.39, "top": 27 },
+        { "name": "prisma/prisma", "value": 365.35, "top": 24 },
+        { "name": "project-chip/connectedhomeip", "value": 268.11, "top": 45 },
+        { "name": "prusa3d/PrusaSlicer", "value": 275.12, "top": 43 },
+        { "name": "python/cpython", "value": 595.01, "top": 9 },
+        { "name": "pytorch/pytorch", "value": 1328.6, "top": 2 },
+        { "name": "qbittorrent/qBittorrent", "value": 184.27, "top": 74 },
+        { "name": "qgis/QGIS", "value": 279.81, "top": 43 },
+        { "name": "qmk/qmk_firmware", "value": 334.03, "top": 30 },
+        { "name": "quarkusio/quarkus", "value": 348.96, "top": 26 },
+        { "name": "rails/rails", "value": 201.65, "top": 66 },
+        { "name": "rancher/rancher", "value": 197.86, "top": 68 },
+        { "name": "rapid7/metasploit-framework", "value": 171.68, "top": 81 },
+        { "name": "ray-project/ray", "value": 494.29, "top": 13 },
+        { "name": "raycast/extensions", "value": 383.87, "top": 22 },
+        { "name": "redis/redis", "value": 141.56, "top": 91 },
+        { "name": "Regalis11/Barotrauma", "value": 204.24, "top": 65 },
+        { "name": "remix-run/remix", "value": 155.28, "top": 86 },
+        { "name": "renovatebot/renovate", "value": 234.12, "top": 54 },
+        { "name": "RocketChat/Rocket.Chat", "value": 272.79, "top": 44 },
+        { "name": "RPCS3/rpcs3", "value": 227.78, "top": 57 },
+        { "name": "rstudio/rstudio", "value": 144.17, "top": 90 },
+        { "name": "ruffle-rs/ruffle", "value": 261.33, "top": 47 },
+        { "name": "rust-lang/rust", "value": 948.9, "top": 4 },
+        { "name": "scikit-learn/scikit-learn", "value": 232.93, "top": 55 },
+        { "name": "scipy/scipy", "value": 182.81, "top": 76 },
+        {
+          "name": "section-engineering-education/engineering-education",
+          "value": 17.92,
+          "top": 99
+        },
+        { "name": "SerenityOS/serenity", "value": 218.99, "top": 59 },
+        { "name": "ShadowMario/FNF-PsychEngine", "value": 178.77, "top": 77 },
+        { "name": "Skyrat-SS13/Skyrat-tg", "value": 153.16, "top": 87 },
+        { "name": "solana-labs/solana", "value": 213.46, "top": 61 },
+        { "name": "solana-labs/token-list", "value": 75.39, "top": 98 },
+        { "name": "sourcegraph/sourcegraph", "value": 306.01, "top": 36 },
+        { "name": "spack/spack", "value": 266.56, "top": 46 },
+        { "name": "spyder-ide/spyder", "value": 175.83, "top": 79 },
+        { "name": "storybookjs/storybook", "value": 353.82, "top": 25 },
+        { "name": "strapi/strapi", "value": 317.85, "top": 33 },
+        { "name": "sveltejs/kit", "value": 214.39, "top": 61 },
+        { "name": "symfony/symfony", "value": 290.21, "top": 39 },
+        { "name": "systemd/systemd", "value": 310.42, "top": 34 },
+        { "name": "tachiyomiorg/tachiyomi", "value": 130.49, "top": 94 },
+        { "name": "tachiyomiorg/tachiyomi-extensions", "value": 298.5, "top": 38 },
+        { "name": "tailscale/tailscale", "value": 242.47, "top": 52 },
+        { "name": "taosdata/TDengine", "value": 213.09, "top": 61 },
+        { "name": "taozhiyu/TyProAction", "value": 346.52, "top": 27 },
+        { "name": "TeamNewPipe/NewPipe", "value": 110.1, "top": 96 },
+        { "name": "tensorflow/tensorflow", "value": 355.63, "top": 25 },
+        { "name": "termux/termux-packages", "value": 194.21, "top": 70 },
+        { "name": "tgstation/tgstation", "value": 396.59, "top": 21 },
+        { "name": "TP-Lab/tokens", "value": 125.14, "top": 94 },
+        { "name": "trinodb/trino", "value": 334.7, "top": 30 },
+        { "name": "trustwallet/assets", "value": 135.39, "top": 92 },
+        { "name": "type-challenges/type-challenges", "value": 185.09, "top": 74 },
+        { "name": "uBlockOrigin/uAssets", "value": 271.36, "top": 45 },
+        { "name": "Ultimaker/Cura", "value": 355.43, "top": 25 },
+        { "name": "ultralytics/yolov5", "value": 146.89, "top": 89 },
+        { "name": "unifyai/ivy", "value": 349.8, "top": 26 },
+        { "name": "ValveSoftware/Dota2-Gameplay", "value": 659.97, "top": 7 },
+        { "name": "ValveSoftware/Proton", "value": 195.22, "top": 70 },
+        { "name": "vectordotdev/vector", "value": 176.69, "top": 78 },
+        { "name": "vercel/next.js", "value": 621.89, "top": 8 },
+        { "name": "vitejs/vite", "value": 225.12, "top": 58 },
+        { "name": "void-linux/void-packages", "value": 283.85, "top": 42 },
+        { "name": "webcompat/web-bugs", "value": 387.1, "top": 22 },
+        { "name": "wjz304/Redpill_CustomBuild", "value": 770.09, "top": 6 },
+        { "name": "woocommerce/woocommerce", "value": 306.18, "top": 36 },
+        { "name": "WordPress/gutenberg", "value": 538.9, "top": 10 },
+        { "name": "xamarin/xamarin-macios", "value": 185.28, "top": 73 },
+        { "name": "xbmc/xbmc", "value": 181.34, "top": 76 },
+        { "name": "yt-dlp/yt-dlp", "value": 375.85, "top": 23 },
+        { "name": "yuzu-emu/yuzu", "value": 152.31, "top": 88 },
+        { "name": "zephyrproject-rtos/zephyr", "value": 645.31, "top": 7 },
+        {
+          "name": "zero-to-mastery/start-here-guidelines",
+          "value": 183.3,
+          "top": 75
+        },
+        { "name": "ziglang/zig", "value": 175.23, "top": 80 },
+        { "name": "zulip/zulip", "value": 272.73, "top": 44 }
+      ],
       titleItem: [
         {
           title: '累计star',  // 累计star总数
@@ -126,52 +432,32 @@ export default {
       ],
       ranking: {
         data: [
-          {
-            name: '周口',
-            value: 55
-          },
-          {
-            name: '南阳',
-            value: 120
-          },
-          {
-            name: '西峡',
-            value: 78
-          },
-          {
-            name: '驻马店',
-            value: 66
-          },
-          {
-            name: '新乡',
-            value: 80
-          },
-          {
-            name: '新乡2',
-            value: 80
-          },
-          {
-            name: '新乡3',
-            value: 80
-          },
-          {
-            name: '新乡4',
-            value: 80
-          },
-          {
-            name: '新乡5',
-            value: 80
-          },
-          {
-            name: '新乡6',
-            value: 80
-          }
+          { name: 'home-assistant/core', value: 2387.11 },
+          { name: 'Kaiserreich/Kaiserreich-4', value: undefined },
+          { name: 'microsoft/vscode', value: 1954.14 },
+          { name: 'NixOS/nixpkgs', value: 2080.5 },
+          { name: 'flutter/flutter', value: 1534.97 },
+          { name: 'MicrosoftDocs/azure-docs', value: 1259.5 },
+          { name: 'pytorch/pytorch', value: 1328.6 },
+          { name: 'dotnet/runtime', value: 1173.57 },
+          { name: 'godotengine/godot', value: 1158.5 },
+          { name: 'microsoft/winget-pkgs', value: 1054.29 },
+          { name: 'grafana/grafana', value: 900.29 },
+          { name: 'kubernetes/kubernetes', value: 1016.81 },
+          { name: 'rust-lang/rust', value: 948.9 },
+          { name: 'elastic/kibana', value: 825.23 },
+          { name: 'google/it-cert-automation-practice', value: 890.45 },
+          { name: 'odoo/odoo', value: 877.05 },
+          { name: 'firstcontributions/first-contributions', value: 790.77 },
+          { name: 'microsoft/PowerToys', value: 784.08 },
+          { name: 'wjz304/Redpill_CustomBuild', value: 770.09 },
+          { name: 'AUTOMATIC1111/stable-diffusion-webui', value: 736.73 }
         ],
         carousel: 'single',
-        unit: '人'
+        unit: 'openrank'
       },
       water: {
-        data: [24, 45],
+        data: [15],
         shape: 'roundRect',
         formatter: '{value}%',
         waveNum: 3
@@ -210,7 +496,7 @@ export default {
     }
   },
   components: {
-    CenterChart
+
   },
   computed: {
     ...mapState(['currentRepository']),
@@ -218,7 +504,7 @@ export default {
   watch: {
     currentRepository: {
       handler: async function (newVal) {
-        this.cdata = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal);
+        this.cdata = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal, newVal);
       },
       deep: true
     },
@@ -230,7 +516,7 @@ export default {
     },
   },
   methods: {
-    async fetchData(path) {
+    async fetchData(path, newVal) {
       let sumArray = [];
       let allStarResponse = await axios.get(path + '/stars.json');
       let allStarData = await allStarResponse.data;
@@ -263,8 +549,26 @@ export default {
       sumArray.push(allDistributor);
 
       this.titleItem.forEach((item, index) => {
-        this.$set(this.titleItem[index], 'number', {number: [sumArray[index]], textAlign: 'left', content: '{nt}', style: {fontSize: 26}});
+        this.$set(this.titleItem[index], 'number', { number: [sumArray[index]], textAlign: 'left', content: '{nt}', style: { fontSize: 26 } });
       });
+
+
+      let result = this.projects.find(function (repo) {
+        return repo.name == newVal;
+      })
+      if (result) {
+        var topValue = []
+        topValue.push(result.top)
+        this.water = {
+          data: topValue,
+          shape: 'roundRect',
+          formatter: '{value}%',
+          waveNum: 3
+        }
+      } else {
+        console.log("找不到匹配的对象");
+      }
+
       return sumArray;
     }
   }
@@ -275,23 +579,27 @@ export default {
 #center {
   display: flex;
   flex-direction: column;
+
   .up {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+
     .item {
       border-radius: 6px;
       padding-top: 8px;
       margin-top: 8px;
       width: 32%;
       height: 70px;
+
       .dv-dig-flop {
         width: 150px;
         height: 30px;
       }
     }
   }
+
   .down {
     padding: 6px 4px;
     padding-bottom: 0;
@@ -299,23 +607,29 @@ export default {
     display: flex;
     height: 255px;
     justify-content: space-between;
+
     .bg-color-black {
       border-radius: 5px;
     }
+
     .ranking {
       padding: 10px;
       width: 59%;
+
       .dv-scr-rank-board {
         height: 225px;
       }
     }
+
     .percent {
       width: 40%;
       display: flex;
       flex-wrap: wrap;
+
       .item {
         width: 50%;
-        height: 120px;
+        height: 250px;
+
         span {
           margin-top: 8px;
           font-size: 14px;
@@ -323,10 +637,12 @@ export default {
           justify-content: center;
         }
       }
+
       .water {
         width: 100%;
+
         .dv-wa-le-po {
-          height: 120px;
+          height: 250px;
         }
       }
     }

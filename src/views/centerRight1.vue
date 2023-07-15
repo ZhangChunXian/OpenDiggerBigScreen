@@ -2,11 +2,8 @@
   <div id="centerRight1">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
-        <span>
-          <icon name="chart-line" class="text-icon"></icon>
-        </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">任务完成排行榜</span>
+          <span style="font-size: 0.8rem">贡献者列表</span>
         </div>
       </div>
       <div class="d-flex jc-center body-box">
@@ -24,7 +21,7 @@ export default {
   data() {
     return {
       config: {
-        header: ['组件', '分支', '覆盖率'],
+        header: ['序号', '月份', '贡献人'],
         data: [
           [
             "2023-03",

@@ -1,12 +1,12 @@
 <template>
   <div id="centerLeft1">
     <div class="bg-color-black">
-      <div class="d-flex pt-2 pl-2">
+      <div class="d-flex">
         <span>
           <icon name="chart-pie" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">地图数据</span>
+          <span  style="font-size: 0.8rem">贡献者词云</span>
           <dv-decoration-1 class="dv-dec-1" />
         </div>
       </div>
