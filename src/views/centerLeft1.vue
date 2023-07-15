@@ -17,7 +17,7 @@
       <div class="bottom-data">
         <div class="item-box mt-2" v-for="(item, index) in numberData" :key="index">
           <div class="d-flex">
-            <span class="coin">￥</span>
+            <span class="coin"></span>
             <dv-digital-flop class="dv-digital-flop" :config="item.number" />
           </div>
           <p class="text" style="text-align: center;">
