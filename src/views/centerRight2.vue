@@ -25,29 +25,29 @@ export default {
   data() {
     return {
       config: {
-        data: [
+        "data": [
           {
-            name: '南阳',
-            value: 167
+            "name": "gmail",
+            "value": 3529
           },
           {
-            name: '周口',
-            value: 67
+            "name": "qq",
+            "value": 369
           },
           {
-            name: '漯河',
-            value: 123
+            "name": "github",
+            "value": 351
           },
           {
-            name: '郑州',
-            value: 55
+            "name": "outlook",
+            "value": 82
           },
           {
-            name: '西峡',
-            value: 98
+            "name": "163",
+            "value": 76
           }
         ],
-        showValue: true
+        "showValue": true
       }
     }
   },
@@ -78,7 +78,7 @@ export default {
         arr.forEach(item => {
           let [name, value] = item;
 
-          if(name === 'users.noreply.github.com') {
+          if (name === 'users.noreply.github.com') {
             name = 'github.com';
           }
 
@@ -95,7 +95,8 @@ export default {
       });
       let output = Object.entries(result)
         .filter(([, value]) => value >= 75)
-        .map(([name, value]) => ({ name, value }));
+        .map(([name, value]) => ({ name, value }))
+        .sort((a, b) => b.value - a.value);
 
       const configs = {
         data: output,
