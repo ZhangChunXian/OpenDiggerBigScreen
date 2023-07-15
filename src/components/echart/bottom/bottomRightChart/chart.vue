@@ -112,12 +112,12 @@ export default {
           },
           visualMap: {
             min: 0,
-            max: 30,
+            max: 50,
             type: 'piecewise',
             orient: 'horizontal',
             calculable: true,
             inRange: {
-              color: ['#98FB98', '#32CD32', '#008000', '#006400', '#004d00']
+              color: ['#ebedf0', '#32CD32', '#008000', '#006400', '#004d00']
             },
             show: false
           },
@@ -125,7 +125,7 @@ export default {
             cellSize: [16, 9],
             range: [newData['thatday'], newData['EndOfThatdayYear']],
             itemStyle: {
-              borderColor: '#ebedf0',
+              borderColor: '#fff',
               borderWidth: 4
             },
             top: '50%', // 调整热力图的位置到下半部分

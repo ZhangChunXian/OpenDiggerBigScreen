@@ -12854,7 +12854,6 @@ export default {
       let data = [];
       let year = '';
 
-      // Calculate the sum of each year and find the max value
       for (let key in datas) {
         let year = key.split('-')[0];
         let sum = datas[key].reduce((a, b) => a + b, 0);
@@ -12868,7 +12867,7 @@ export default {
         }
       }
 
-      // Push the sum and max value to radarDataAvg and indicator
+
       for (let year in years) {
         radarDataAvg.push(years[year]);
         indicator.push({ name: year, max: max });
@@ -12886,8 +12885,8 @@ export default {
         let daysInMonth = dayjs(`${year}-${month}`).daysInMonth();
         for (let i = 0; i < daysInMonth; i++) {
           let sum = 0;
-          for (let j = 0; j < 6; j++) {
-            sum += datas[date][i * 6 + j];
+          for (let j = 0; j < 5; j++) {
+            sum += datas[date][i * 5 + j];
           }
           let day = i + 1 < 10 ? `0${i + 1}` : i + 1;
           data.push([`${year}-${month}-${day}`, sum]);

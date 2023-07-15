@@ -33,8 +33,9 @@ export default {
           tooltip: {
             show: true,
             formatter: function (params) {
-              return `${params.name}: ${params.value}`;
-            }
+            let value = parseFloat(params.value).toFixed(1);
+            return `${params.name}: ${value}`;
+        }
           },
           series: [
             {
