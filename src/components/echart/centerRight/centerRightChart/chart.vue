@@ -1,16 +1,9 @@
 <template>
   <div>
-    <Echart
-      :options="options"
-      id="centreRight2Chart1"
-      height="200px"
-      width="260px"
-    ></Echart>
   </div>
 </template>
 
 <script>
-import Echart from '@/common/echart'
 export default {
   data () {
     return {
@@ -18,7 +11,6 @@ export default {
     };
   },
   components: {
-    Echart,
   },
   props: {
     cdata: {

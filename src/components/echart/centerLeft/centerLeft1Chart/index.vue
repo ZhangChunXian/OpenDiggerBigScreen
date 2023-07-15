@@ -10,14 +10,10 @@ export default {
   data () {
     return {
       cdata: {
-        xData: ["data1", "data2", "data3", "data4", "data5", "data6"],
+        xData: ["活跃贡献者", "非活跃贡献者"],
         seriesData: [
-          { value: 10, name: "data1" },
-          { value: 5, name: "data2" },
-          { value: 15, name: "data3" },
-          { value: 25, name: "data4" },
-          { value: 20, name: "data5" },
-          { value: 35, name: "data6" }
+          { value: 1659, name: "活跃贡献者" },
+          { value: 490, name: "非活跃贡献者" },
         ]
       }
     }

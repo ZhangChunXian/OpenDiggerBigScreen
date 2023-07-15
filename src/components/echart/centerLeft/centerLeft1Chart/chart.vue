@@ -11,6 +11,9 @@
 
 <script>
 import Echart from '@/common/echart'
+import { mapState } from 'vuex'
+import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -32,7 +35,6 @@ export default {
         this.options = {
           color: [
             "#37a2da",
-            "#32c5e9",
             "#9fe6b8",
             "#ffdb5c",
             "#ff9f7f",
@@ -63,7 +65,6 @@ export default {
               name: "通过率统计",
               type: "pie",
               radius: [10, 50],
-              roseType: "area",
               center: ["50%", "40%"],
               data: newData.seriesData
             }
@@ -72,9 +73,52 @@ export default {
       },
       immediate: true,
       deep: true
+    },
+    currentRepository: {
+      handler: async function (newVal) {
+        let tmp = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal)
+        this.cdata.xData = tmp.xData
+        this.cdata.seriesData = tmp.seriesData
+      },
+      deep: true
     }
-  }
-};
+  },
+  computed: {
+    ...mapState(['currentRepository']),
+  },
+  methods: {
+    async fetchData(path) {
+      let participantsResponse = await axios.get(path + '/participants.json');
+      let participantsData = participantsResponse.data;
+      let latestParticipants = this.parseParticipants(participantsData);
+
+
+      let inactiveParticipantsResponse = await axios.get(path + '/inactive_contributors.json');
+      let inactiveParticipantsData = inactiveParticipantsResponse.data;
+      let inactiveLatestParticipants = this.parseParticipants(inactiveParticipantsData);
+
+      let xData = ["活跃贡献者", "非活跃贡献者"];
+      let seriesData = [
+        {
+          "value": latestParticipants,
+          "name": "活跃贡献者"
+        },
+        {
+          "value": inactiveLatestParticipants,
+          "name": "非活跃贡献者"
+        }
+      ]
+      return { xData, seriesData }
+    },
+    parseParticipants(participantsData) {
+      const keys = Object.keys(participantsData);
+      const latestMonth = keys[keys.length - 2];
+      const latestValue = participantsData[latestMonth];
+
+      return latestValue;
+    }
+  },
+}
 </script>
 
 <style lang="scss" scoped>

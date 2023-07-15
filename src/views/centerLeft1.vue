@@ -15,18 +15,14 @@
       </div>
       <!-- 4个主要的数据 -->
       <div class="bottom-data">
-        <div
-          class="item-box mt-2"
-          v-for="(item, index) in numberData"
-          :key="index"
-        >
+        <div class="item-box mt-2" v-for="(item, index) in numberData" :key="index">
           <div class="d-flex">
             <span class="coin">￥</span>
             <dv-digital-flop class="dv-digital-flop" :config="item.number" />
           </div>
           <p class="text" style="text-align: center;">
             {{ item.text }}
-            <span class="colorYellow">(件)</span>
+            <span class="colorYellow">(人)</span>
           </p>
         </div>
       </div>
@@ -36,59 +32,39 @@
 
 <script>
 import CenterLeft1Chart from '@/components/echart/centerLeft/centerLeft1Chart'
+import { mapState } from 'vuex'
+import axios from 'axios'
+
 export default {
   data() {
     return {
       numberData: [
         {
           number: {
-            number: [15],
-            toFixed: 1,
+            number: [1659],
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
               fontSize: 24
             }
           },
-          text: '今日构建总量'
+          text: '活跃贡献者'
         },
         {
           number: {
-            number: [1144],
-            toFixed: 1,
+            number: [490],
+            toFixed: 0,
             textAlign: 'left',
             content: '{nt}',
             style: {
               fontSize: 24
             }
           },
-          text: '总共完成数量'
-        },
-        {
-          number: {
-            number: [361],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '正在编译数量'
-        },
-        {
-          number: {
-            number: [157],
-            toFixed: 1,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '未通过数量'
+          text: '非活跃贡献者'
         }
-      ]
+      ],
+      refreshFlag: false
     }
   },
   components: {
@@ -99,15 +75,75 @@ export default {
   },
   methods: {
     changeTiming() {
-      setInterval(() => {
-        this.changeNumber()
-      }, 3000)
     },
     changeNumber() {
-      this.numberData.forEach((item, index) => {
-        item.number.number[0] += ++index
-        item.number = { ...item.number }
-      })
+    },
+    async fetchData(path) {
+      let participantsResponse = await axios.get(path + '/inactive_contributors.json');
+      let participantsData = participantsResponse.data;
+      let latestParticipants = this.parseParticipants(participantsData);
+
+
+      let inactiveParticipantsResponse = await axios.get(path + '/participants.json');
+      let inactiveParticipantsData = inactiveParticipantsResponse.data;
+      let inactiveLatestParticipants = this.parseParticipants(inactiveParticipantsData);
+
+      return { latestParticipants, inactiveLatestParticipants }
+    },
+    parseParticipants(participantsData) {
+      const keys = Object.keys(participantsData);
+      const latestMonth = keys[keys.length - 2];
+      const latestValue = participantsData[latestMonth];
+
+      return latestValue;
+
+    },
+    forceUpdate() {
+      this.refreshFlag = !this.refreshFlag;
+    },
+    refreshComponent() {
+      this.refreshFlag = !this.refreshFlag;
+    }
+  },
+  computed: {
+    ...mapState(['currentRepository']),
+  },
+  watch: {
+    currentRepository: {
+      handler: async function (newVal) {
+        let tmp = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal)
+        this.numberData = [
+        {
+          number: {
+            number: [tmp.latestParticipants],
+            toFixed: 0,
+            textAlign: 'left',
+            content: '{nt}',
+            style: {
+              fontSize: 24
+            }
+          },
+          text: '活跃贡献者'
+        },
+        {
+          number: {
+            number: [tmp.inactiveLatestParticipants],
+            toFixed: 0,
+            textAlign: 'left',
+            content: '{nt}',
+            style: {
+              fontSize: 24
+            }
+          },
+          text: '非活跃贡献者'
+        }
+        ]
+        console.log(this.numberData)
+        this.forceUpdate()
+        this.refreshComponent()
+      },
+      deep: true,
+      immediate: true
     }
   }
 }
@@ -122,13 +158,16 @@ $box-height: 410px;
   height: $box-height;
   width: $box-width;
   border-radius: 10px;
+
   .bg-color-black {
     height: $box-height - 30px;
     border-radius: 10px;
   }
+
   .text {
     color: #c3cbde;
   }
+
   .dv-dec-3 {
     position: relative;
     width: 100px;
@@ -138,18 +177,21 @@ $box-height: 410px;
 
   .bottom-data {
     .item-box {
-      & > div {
+      &>div {
         padding-right: 5px;
       }
+
       font-size: 14px;
       float: right;
       position: relative;
       width: 50%;
       color: #d3d6dd;
+
       .dv-digital-flop {
         width: 120px;
         height: 30px;
       }
+
       // 金币
       .coin {
         position: relative;
@@ -157,13 +199,14 @@ $box-height: 410px;
         font-size: 20px;
         color: #ffc107;
       }
+
       .colorYellow {
         color: yellowgreen;
       }
+
       p {
         text-align: center;
       }
     }
   }
-}
-</style>
+}</style>

@@ -73,7 +73,7 @@ export default {
     overflow: hidden;
     .dv-cap-chart {
       width: 100%;
-      height: 160px;
+      height: 350px;
     }
   }
 }

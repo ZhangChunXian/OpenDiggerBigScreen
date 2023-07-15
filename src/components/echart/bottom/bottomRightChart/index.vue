@@ -12937,7 +12937,6 @@ export default {
             this.cdata.filterYearData.push(date);
           }
         })
-        console.log(this.cdata.data)
       },
       deep: true
     }
