@@ -1799,7 +1799,7 @@ export default {
   watch: {
     currentRepository: {
       handler: async function (newVal) {
-        this.cdata = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal);
+        this.cdata = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal);
       },
       deep: true
     }

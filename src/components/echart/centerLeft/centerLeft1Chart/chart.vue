@@ -76,7 +76,7 @@ export default {
     },
     currentRepository: {
       handler: async function (newVal) {
-        let tmp = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal)
+        let tmp = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal)
         this.cdata.xData = tmp.xData
         this.cdata.seriesData = tmp.seriesData
       },

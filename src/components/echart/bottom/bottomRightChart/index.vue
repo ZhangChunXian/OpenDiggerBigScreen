@@ -12916,7 +12916,7 @@ export default {
   watch: {
     currentRepository: {
       handler: async function (newVal) {
-        this.temp = await this.fetchData('https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/top_300_metrics/' + newVal);
+        this.temp = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal);
         this.cdata.radarDataAvg = this.temp.radarDataAvg;
         this.cdata.indicator = this.temp.indicator;
         this.cdata.data = this.temp.data;

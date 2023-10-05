@@ -40,25 +40,38 @@
               <span class="text fw-b">{{this.$store.state.currentRepository}}</span>
             </div>
             <div class="react-right mr-4 react-l-s">
+<!--              <span class="react-after"></span>-->
+<!--              <span class="text">-->
+<!--                <el-select-->
+<!--                  v-model="value"-->
+<!--                  filterable-->
+<!--                  placeholder="请选择"-->
+<!--                  @input="setCurrentRepository()"-->
+<!--                >-->
+<!--                  <el-option-->
+<!--                    v-for="item in options"-->
+<!--                    :key="item.value"-->
+<!--                    :label="item.label"-->
+<!--                    :value="item.label"-->
+<!--                    >-->
+<!--                  </el-option>-->
+<!--                </el-select>-->
+<!--                </span-->
+<!--              >-->
               <span class="react-after"></span>
-              <span class="text"
-                >
-                <el-select
-                  v-model="value"
-                  filterable
-                  placeholder="请选择"
-                  @input="setCurrentRepository()"
-                >
-                  <el-option
-                    v-for="item in options"
-                    :key="item.value"
-                    :label="item.label"
-                    :value="item.label"
-                    >
-                  </el-option>
-                </el-select>
-                </span
-              >
+              <span class="text">
+                <el-row>
+                  <el-col :span="12">
+                    <el-autocomplete
+                        v-model="state1"
+                        :fetch-suggestions="querySearch"
+                        placeholder="请输入内容"
+                        @select="handleSelect"
+                        @change="handleSelect"
+                    ></el-autocomplete>
+                  </el-col>
+                </el-row>
+              </span>
             </div>
           </div>
         </div>
@@ -129,7 +142,9 @@ export default {
       dateWeek: null,
       weekday: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
       decorationColor: ['#568aea', '#000000'],
-      value: ''
+      value: '',
+      state1: '',
+      repositories: []
     }
   },
   components: {
@@ -144,6 +159,7 @@ export default {
   mounted() {
     this.timeFn()
     this.cancelLoading()
+    this.repositories = this.$store.state.Repositories
   },
   beforeDestroy () {
     clearInterval(this.timing)
@@ -163,8 +179,33 @@ export default {
     },
     setCurrentRepository() {
       this.$store.commit('setCurrentRepository', this.value)
-    }
-  }
+    },
+    querySearch(queryString, cb) {
+      var repositories = this.repositories.map(item => {
+        return {
+          value: item.label,
+          label: item.value
+        };
+      });
+      var results = queryString ? repositories.filter(this.createFilter(queryString)) : repositories;
+      // 调用 callback 返回建议列表的数据
+      cb(results);
+    },
+    createFilter(queryString) {
+      return (repository) => {
+        return (repository.value.indexOf(queryString) === 0);
+      };
+    },
+    handleSelect(item) {
+      if(typeof item == 'string') {
+        if (this.state1) {
+          this.$store.commit('setCurrentRepository', this.state1)
+        }
+      } else {
+        this.$store.commit('setCurrentRepository', item.value)
+      }
+    },
+  },
 }
 </script>
 
