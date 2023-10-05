@@ -129,6 +129,7 @@ import centerRight2 from './centerRight2'
 import center from './center'
 import bottomLeft from './bottomLeft'
 import bottomRight from './bottomRight'
+import axios from 'axios'
 
 export default {
   mixins: [ drawMixin ],
@@ -199,12 +200,25 @@ export default {
     handleSelect(item) {
       if(typeof item == 'string') {
         if (this.state1) {
-          this.$store.commit('setCurrentRepository', this.state1)
+          if (this.checkRepoValidity(this.state1)) {
+            this.$store.commit('setCurrentRepository', this.state1)
+          }
         }
       } else {
         this.$store.commit('setCurrentRepository', item.value)
       }
     },
+    checkRepoValidity(link) {
+      axios.get(`https://oss.x-lab.info/open_digger/github/` + link)
+          .then(response => {
+            console.log('Valid repository:', response.data);
+            return 1;
+          })
+          .catch(() => {
+            this.$message.error('您输入的仓库名无效, 请检查后重新输入');
+            return 0;
+          });
+    }
   },
 }
 </script>

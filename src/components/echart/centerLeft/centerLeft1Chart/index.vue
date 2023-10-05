@@ -10,10 +10,12 @@ export default {
   data () {
     return {
       cdata: {
-        xData: ["活跃贡献者", "非活跃贡献者"],
+        xData: ["TypeScript", "JavaScript", "CSS", "其他语言"],
         seriesData: [
-          { value: 1659, name: "活跃贡献者" },
-          { value: 490, name: "非活跃贡献者" },
+          { value: 5211981, name: "TypeScript" },
+          { value: 26845, name: "JavaScript" },
+          { value: 3941, name: "CSS" },
+          { value: 2604, name: "其他语言" },
         ]
       }
     }

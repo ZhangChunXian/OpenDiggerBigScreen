@@ -138,7 +138,6 @@ export default {
           text: '非活跃贡献者'
         }
         ]
-        console.log(this.numberData)
         this.forceUpdate()
         this.refreshComponent()
       },

@@ -62,7 +62,7 @@ export default {
           },
           series: [
             {
-              name: "通过率统计",
+              name: "项目语言统计",
               type: "pie",
               radius: [10, 50],
               center: ["50%", "40%"],
@@ -77,6 +77,7 @@ export default {
     currentRepository: {
       handler: async function (newVal) {
         let tmp = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal)
+        console.log("tmp", tmp)
         this.cdata.xData = tmp.xData
         this.cdata.seriesData = tmp.seriesData
       },
