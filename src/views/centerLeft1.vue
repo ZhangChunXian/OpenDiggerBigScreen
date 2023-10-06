@@ -6,7 +6,7 @@
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span class="fs-xl text mx-2">任务通过率</span>
+          <span style="font-size: 0.8rem">项目语言构成</span>
           <dv-decoration-3 class="dv-dec-3" />
         </div>
       </div>
@@ -22,7 +22,7 @@
           </div>
           <p class="text" style="text-align: center;">
             {{ item.text }}
-            <span class="colorYellow">(人)</span>
+            <span class="colorYellow"></span>
           </p>
         </div>
       </div>
@@ -41,30 +41,54 @@ export default {
       numberData: [
         {
           number: {
-            number: [1659],
-            toFixed: 0,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [0.51],
+            toFixed: 2,
+            textAlign: 'center',
+            content: '{nt}%',
             style: {
               fontSize: 24
             }
           },
-          text: '活跃贡献者'
+          text: 'JavaScript'
         },
         {
           number: {
-            number: [490],
-            toFixed: 0,
-            textAlign: 'left',
-            content: '{nt}',
+            number: [99.36],
+            toFixed: 2,
+            textAlign: 'center',
+            content: '{nt}%',
             style: {
               fontSize: 24
             }
           },
-          text: '非活跃贡献者'
-        }
+          text: 'TypeScript'
+        },
+        {
+          number: {
+            number: [0.05],
+            toFixed: 2,
+            textAlign: 'center',
+            content: '{nt}%',
+            style: {
+              fontSize: 24
+            }
+          },
+          text: '其他语言'
+        },
+        {
+          number: {
+            number: [0.08],
+            toFixed: 2,
+            textAlign: 'center',
+            content: '{nt}%',
+            style: {
+              fontSize: 24
+            }
+          },
+          text: 'CSS'
+        },
       ],
-      refreshFlag: false
+      refreshFlag: false,
     }
   },
   components: {
@@ -107,44 +131,122 @@ export default {
   },
   computed: {
     ...mapState(['currentRepository']),
+    ...mapState(['languages']),
+    languageData() {
+      return this.$store.state.languages;
+    }
   },
   watch: {
-    currentRepository: {
-      handler: async function (newVal) {
-        let tmp = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal)
-        this.numberData = [
-        {
-          number: {
-            number: [tmp.latestParticipants],
-            toFixed: 0,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '活跃贡献者'
-        },
-        {
-          number: {
-            number: [tmp.inactiveLatestParticipants],
-            toFixed: 0,
-            textAlign: 'left',
-            content: '{nt}',
-            style: {
-              fontSize: 24
-            }
-          },
-          text: '非活跃贡献者'
+    // currentRepository: {
+    //   handler: async function (newVal) {
+    //     console.log("currentRepository", newVal);
+    //      // let tmp = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal)
+    //      // this.numberData = [
+    //      // {
+    //      //   number: {
+    //      //     number: [tmp.latestParticipants],
+    //      //     toFixed: 0,
+    //      //     textAlign: 'left',
+    //      //     content: '{nt}',
+    //      //     style: {
+    //      //       fontSize: 24
+    //      //     }
+    //      //   },
+    //      //   text: '活跃贡献者'
+    //      // },
+    //      // {
+    //      //   number: {
+    //      //     number: [tmp.inactiveLatestParticipants],
+    //      //     toFixed: 0,
+    //      //     textAlign: 'left',
+    //      //     content: '{nt}',
+    //      //     style: {
+    //      //       fontSize: 24
+    //      //     }
+    //      //   },
+    //      //   text: '非活跃贡献者'
+    //      // }
+    //      // ]
+    //      // this.forceUpdate()
+    //      // this.refreshComponent()
+    //    },
+    //    // deep: true,
+    //    // immediate: true
+    //   },
+
+    // languages: {
+    //   // handler: function (newVal, oldVal) {
+    //   //   if (typeof newVal != 'undefined') {
+    //   //     console.log("newVal === oldVal", newVal === oldVal)
+    //   //     let input = newVal.seriesData;
+    //   //     // 计算总的 value
+    //   //     const totalValue = input.reduce((total, item) => total + item.value, 0);
+    //   //
+    //   //     // 排序并转换数据
+    //   //     const sortedAndTransformed = input
+    //   //         .sort((a, b) => b.value - a.value) // 排序
+    //   //         .map(item => { // 转换格式
+    //   //           return {
+    //   //             number: {
+    //   //               number: [parseFloat(((item.value / totalValue) * 100).toFixed(2))],
+    //   //               toFixed: 2,
+    //   //               textAlign: 'center',
+    //   //               content: '{nt}%',
+    //   //               style: {
+    //   //                 fontSize: 24
+    //   //               }
+    //   //             },
+    //   //             text: item.name
+    //   //           };
+    //   //         });
+    //   //
+    //   //     // 创建最终的对象
+    //   //     this.numberData = sortedAndTransformed;
+    //   //     this.refreshComponent()
+    //   //   }
+    //   // },
+    //   // deep: true,
+    //   // immediate: true
+    // },
+    languageData: {
+      handler(newVal, oldVal) {
+        if (newVal!== oldVal) {
+          let input = newVal.seriesData;
+          // 计算总的 value
+          const totalValue = input.reduce((total, item) => total + item.value, 0);
+          // 排序并转换数据
+          const sortedAndTransformed = input
+              .sort((a, b) => b.value - a.value) // 排序
+              .map(item => { // 转换格式
+                return {
+                  number: {
+                    number: [parseFloat(((item.value / totalValue) * 100).toFixed(2))],
+                    toFixed: 2,
+                    textAlign: 'center',
+                    content: '{nt}%',
+                    style: {
+                      fontSize: 24
+                    }
+                  },
+                  text: item.name
+                };
+              });
+          // 创建最终的对象
+          let temp = sortedAndTransformed[0];
+          sortedAndTransformed[0] = sortedAndTransformed[1];
+          sortedAndTransformed[1] = temp;
+
+          temp = sortedAndTransformed[2];
+          sortedAndTransformed[2] = sortedAndTransformed[3];
+          sortedAndTransformed[3] = temp;
+
+          this.numberData = sortedAndTransformed;
+          this.refreshComponent()
         }
-        ]
-        this.forceUpdate()
-        this.refreshComponent()
       },
       deep: true,
-      immediate: true
     }
-  }
+  },
 }
 </script>
 

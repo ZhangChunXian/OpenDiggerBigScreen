@@ -1208,6 +1208,27 @@ export default new Vuex.Store({
       },
     ],
     currentRepository: "ant-design/ant-design",
+    languages: {
+      xData: ["TypeScript", "JavaScript", "CSS", "其他语言"],
+      seriesData: [
+        {
+          "name": "TypeScript",
+          "value": 5211992
+        },
+        {
+          "name": "JavaScript",
+          "value": 26845
+        },
+        {
+          "name": "CSS",
+          "value": 3941
+        },
+        {
+          "name": "其他语言",
+          "value": 2604
+        }
+      ]
+    },
     bottomLeftData: {}
   },
   mutations: {
@@ -1216,6 +1237,9 @@ export default new Vuex.Store({
     },
     setBottomLeftData(state, data) {
       state.bottomLeftData = data
+    },
+    setLanguages(state, languages) {
+      state.languages = languages;
     }
   },
   actions: {},
