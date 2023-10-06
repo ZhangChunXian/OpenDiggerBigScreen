@@ -15,10 +15,6 @@ import 'vue-awesome/icons/chart-pie.js';
 import 'vue-awesome/icons/chart-line.js';
 import 'vue-awesome/icons/align-left.js';
 
-// 前端引导组件
-import VueIntro from 'vue-introjs';
-import 'intro.js/introjs.css';
-
 //引入echart
 //4.x 引用方式
 import echarts from 'echarts'
@@ -33,9 +29,6 @@ Vue.config.productionTip = false;
 Vue.component('icon', Icon);
 Vue.use(dataV);
 Vue.use(ElementUI);
-
-// 注册使用前端引导组件
-Vue.use(VueIntro)
 
 new Vue({
   router,

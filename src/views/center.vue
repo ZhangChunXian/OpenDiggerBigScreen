@@ -10,22 +10,19 @@
     </div>
     <div class="down">
       <div class="ranking bg-color-black">
-        <span>
-          <icon name="chart-pie" class="text-icon"></icon>
-        </span>
-        <span class="fs-xl text mx-2 mb-1 pl-3">年度负责人组件达标榜</span>
-        <dv-scroll-ranking-board class="dv-scr-rank-board mt-1" :config="ranking" />
+        <Echart :options="options"  style="height: 100%;"/>
       </div>
-      <div class="percent">
-        <div class="water">
-          <dv-water-level-pond class="dv-wa-le-po" :config="water" />
-        </div>
-      </div>
+<!--      <div class="percent">-->
+<!--        <div class="water">-->
+<!--          <dv-water-level-pond class="dv-wa-le-po" :config="water" />-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
 
 <script>
+import Echart from '@/common/echart';
 import { mapState } from 'vuex'
 import axios from 'axios'
 
@@ -492,11 +489,328 @@ export default {
             }
           }
         }
-      ]
+      ],
+      options: {
+        backgroundColor: "#0e1325",
+
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+            textStyle: {
+              color: "#fff"
+            }
+
+          },
+        },
+        grid: {
+          borderWidth: 0,
+          top: 40,
+          bottom: 20,
+          textStyle: {
+            color: "#fff"
+          }
+        },
+        legend: {
+          x: '46%',
+          top: '6%',
+          textStyle: {
+            color: '#90979c',
+          },
+          data: ['OpenRank值']
+        },
+        calculable: true,
+        xAxis: [{
+          type: "category",
+          axisLine: {
+            lineStyle: {
+              color: "rgba(204,187,225,0.5)",
+            }
+          },
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          data: [
+            "2015-05",
+            "2015-06",
+            "2015-07",
+            "2015-08",
+            "2015-09",
+            "2015-10",
+            "2015-11",
+            "2015-12",
+            "2016-01",
+            "2016-02",
+            "2016-03",
+            "2016-04",
+            "2016-05",
+            "2016-06",
+            "2016-07",
+            "2016-08",
+            "2016-09",
+            "2016-10",
+            "2016-11",
+            "2016-12",
+            "2017-01",
+            "2017-02",
+            "2017-03",
+            "2017-04",
+            "2017-05",
+            "2017-06",
+            "2017-07",
+            "2017-08",
+            "2017-09",
+            "2017-10",
+            "2017-11",
+            "2017-12",
+            "2018-01",
+            "2018-02",
+            "2018-03",
+            "2018-04",
+            "2018-05",
+            "2018-06",
+            "2018-07",
+            "2018-08",
+            "2018-09",
+            "2018-10",
+            "2018-11",
+            "2018-12",
+            "2019-01",
+            "2019-02",
+            "2019-03",
+            "2019-04",
+            "2019-05",
+            "2019-06",
+            "2019-07",
+            "2019-08",
+            "2019-09",
+            "2019-10",
+            "2019-11",
+            "2019-12",
+            "2020-01",
+            "2020-02",
+            "2020-03",
+            "2020-04",
+            "2020-05",
+            "2020-06",
+            "2020-07",
+            "2020-08",
+            "2020-09",
+            "2020-10",
+            "2020-11",
+            "2020-12",
+            "2021-01",
+            "2021-02",
+            "2021-03",
+            "2021-04",
+            "2021-05",
+            "2021-06",
+            "2021-07",
+            "2021-08",
+            "2021-09",
+            "2021-10",
+            "2021-11",
+            "2021-12",
+            "2022-01",
+            "2022-02",
+            "2022-03",
+            "2022-04",
+            "2022-05",
+            "2022-06",
+            "2022-07",
+            "2022-08",
+            "2022-09",
+            "2022-10",
+            "2022-11",
+            "2022-12",
+            "2023-01",
+            "2023-02",
+            "2023-03",
+            "2023-04",
+            "2023-05",
+            "2023-06",
+            "2023-07",
+            "2023-08",
+            "2023-09"
+          ],
+        }],
+
+        yAxis: [{
+          type: "value",
+          splitLine: {
+            show: false
+          },
+          axisLine: {
+            lineStyle: {
+              color: "rgba(204,187,225,0.5)",
+            }
+          },
+
+        }],
+        dataZoom: [{
+          show: true,
+          height: 30,
+          xAxisIndex: [0],
+          bottom: 18,
+
+          "start": 75,
+          "end": 100,
+          handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+          handleSize: '110%',
+          handleStyle: {
+            color: "#5B3AAE",
+          },
+          textStyle:{
+            color:"rgba(204,187,225,0.5)",
+          },
+          fillerColor:"rgba(67,55,160,0.4)",
+          borderColor: "rgba(204,187,225,0.5)",
+
+        }, {
+          type: "inside",
+          show: true,
+          height: 15,
+          start: 1,
+          end: 35
+        }],
+        series: [
+          {
+            name: "OpenRank值",
+            type: "line",
+            symbolSize: 10,
+            symbol: 'circle',
+            itemStyle: {
+              color: "#c257F6",
+            },
+            markPoint: {
+              label: {
+                normal: {
+                  textStyle: {
+                    color: '#fff'
+                  }
+                }
+              },
+              data: [{
+                type: 'max',
+                name: '最大值',
+
+              }, {
+                type: 'min',
+                name: '最小值'
+              }]
+            },
+            data: [
+              0.73,
+              4.79,
+              16.46,
+              35.29,
+              49.28,
+              48.49,
+              57.03,
+              68.93,
+              80.07,
+              75.68,
+              94.84,
+              110.97,
+              140.27,
+              149.72,
+              162.3,
+              165.38,
+              171.41,
+              179.84,
+              190.38,
+              207.08,
+              203.08,
+              201.98,
+              216.96,
+              201.83,
+              200.14,
+              203.77,
+              191.21,
+              199.71,
+              189.58,
+              175.64,
+              160.94,
+              188.68,
+              187.02,
+              162.12,
+              181.63,
+              191.16,
+              199.46,
+              190.41,
+              203.64,
+              208.6,
+              226.31,
+              217.62,
+              215.26,
+              481.28,
+              362.92,
+              299.22,
+              310.88,
+              316.37,
+              294.04,
+              269.72,
+              306.22,
+              301.54,
+              270.6,
+              256.68,
+              239.71,
+              252.02,
+              285.98,
+              268.89,
+              338.84,
+              386.79,
+              384.98,
+              383.53,
+              356.5,
+              324.43,
+              306.83,
+              303.21,
+              318.44,
+              303.42,
+              287.58,
+              267.87,
+              262.07,
+              241.47,
+              229.36,
+              229.4,
+              224.84,
+              205.17,
+              211.17,
+              191,
+              167.63,
+              186.97,
+              183.55,
+              174.04,
+              199.63,
+              216.72,
+              210.79,
+              212.01,
+              213.67,
+              221.97,
+              223.93,
+              223.61,
+              277.09,
+              294.88,
+              275.87,
+              274.61,
+              274.15,
+              267.53,
+              293.08,
+              274.53,
+              272.84,
+              285.98,
+              288.53
+            ]
+          }, ]
+      },
     }
   },
   components: {
-
+      Echart,
   },
   computed: {
     ...mapState(['currentRepository']),
@@ -569,6 +883,129 @@ export default {
         console.log("找不到匹配的对象");
       }
 
+      let openrankResponse = await axios.get(path + '/openrank.json');
+      let openrankData = await openrankResponse.data;
+      let openrankMonth = Object.keys(openrankData)
+      let openrankValues = Object.values(openrankData)
+
+      openrankMonth.pop();
+      openrankValues.pop();
+      console.log("openrankMonth", openrankMonth)
+      console.log("openrankValues", openrankValues)
+      this.options = {
+        backgroundColor: "#0e1325",
+
+        tooltip: {
+          trigger: "axis",
+          axisPointer: {
+            type: "shadow",
+            textStyle: {
+              color: "#fff"
+            }
+
+          },
+        },
+        grid: {
+          borderWidth: 0,
+          top: 40,
+          bottom: 20,
+          textStyle: {
+            color: "#fff"
+          }
+        },
+        legend: {
+          x: '46%',
+          top: '6%',
+          textStyle: {
+            color: '#90979c',
+          },
+          data: ['OpenRank值']
+        },
+        calculable: true,
+        xAxis: [{
+          type: "category",
+          axisLine: {
+            lineStyle: {
+              color: "rgba(204,187,225,0.5)",
+            }
+          },
+          splitLine: {
+            show: false
+          },
+          axisTick: {
+            show: false
+          },
+          data: openrankMonth,
+        }],
+
+        yAxis: [{
+          type: "value",
+          splitLine: {
+            show: false
+          },
+          axisLine: {
+            lineStyle: {
+              color: "rgba(204,187,225,0.5)",
+            }
+          },
+
+        }],
+        dataZoom: [{
+          show: true,
+          height: 30,
+          xAxisIndex: [0],
+          bottom: 18,
+
+          "start": 75,
+          "end": 100,
+          handleIcon: 'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+          handleSize: '110%',
+          handleStyle: {
+            color: "#5B3AAE",
+          },
+          textStyle:{
+            color:"rgba(204,187,225,0.5)",
+          },
+          fillerColor:"rgba(67,55,160,0.4)",
+          borderColor: "rgba(204,187,225,0.5)",
+
+        }, {
+          type: "inside",
+          show: true,
+          height: 15,
+          start: 1,
+          end: 35
+        }],
+        series: [
+          {
+            name: "OpenRank值",
+            type: "line",
+            symbolSize: 10,
+            symbol: 'circle',
+            itemStyle: {
+              color: "#c257F6",
+            },
+            markPoint: {
+              label: {
+                normal: {
+                  textStyle: {
+                    color: '#fff'
+                  }
+                }
+              },
+              data: [{
+                type: 'max',
+                name: '最大值',
+
+              }, {
+                type: 'min',
+                name: '最小值'
+              }]
+            },
+            data: openrankValues,
+          }, ]
+      };
+
       return sumArray;
     }
   }
@@ -614,7 +1051,7 @@ export default {
 
     .ranking {
       padding: 10px;
-      width: 59%;
+      width: 100%;
 
       .dv-scr-rank-board {
         height: 225px;
