@@ -110,6 +110,7 @@ export default {
             top: 50,
             left: 60
           },
+          tooltip: {},
           visualMap: {
             min: 0,
             max: 50,
@@ -117,7 +118,7 @@ export default {
             orient: 'horizontal',
             calculable: true,
             inRange: {
-              color: ['#ebedf0', '#32CD32', '#008000', '#006400', '#004d00']
+              color: ['#161b22', '#0e4429', '#0d743c', '#26a641', '#39d353']
             },
             show: false
           },
@@ -125,11 +126,11 @@ export default {
             cellSize: [16, 9],
             range: [newData['thatday'], newData['EndOfThatdayYear']],
             itemStyle: {
-              borderColor: '#fff',
+              borderColor: '#0d1117',
               borderWidth: 4
             },
-            top: '50%', // 调整热力图的位置到下半部分
-            bottom: '10%',
+            top: '66%', // 调整热力图的位置到下半部分
+            bottom: '12%',
             left: 'center',
             splitLine: {
               show: false
@@ -159,16 +160,16 @@ export default {
               fontSize: 28
             }
           },
-          tooltip: {
-            trigger: 'item',
-            position: 'top',
-            formatter: function(params) {
-            return '日期：' + params.value[0] + '<br/>活跃度：' + params.value[1];
-            }
-          },
+          // tooltip: {
+          //   // trigger: 'item',
+          //   // position: 'top',
+          //   // formatter: function(params) {
+          //   // return '日期：' + params.value[0] + '<br/>活跃度：' + params.value[1];
+          //   // }
+          // },
           radar: {
             center: ['60%', '27%'],
-            radius: '30%',
+            radius: '40%',
             name: {
               color: '#fff'
             },
@@ -201,7 +202,14 @@ export default {
             {
               type: 'heatmap',
               coordinateSystem: 'calendar',
-              data: newData['filterYearData']
+              data: newData['filterYearData'],
+              tooltip: {
+                trigger: 'item',
+                position: 'top',
+                formatter: function(params) {
+                return '日期：' + params.value[0] + '<br/>活跃值：' + params.value[1];
+                }
+              }
             },
             {
               type: 'radar',
@@ -212,7 +220,7 @@ export default {
                   name: '年度活跃值',
                   itemStyle: {
                     normal: {
-                      color: 'rgba(248,211,81)'
+                      color: '#00224a'
                     }
                   },
                   lineStyle: {
@@ -222,16 +230,19 @@ export default {
                   },
                   areaStyle: {
                     normal: {
-                      color: 'rgba(248,211,81, 0.7)',
-                      shadowBlur: 25,
-                      shadowColor: 'rgba(248,211,81)',
-                      shadowOffsetX: 0,
-                      shadowOffsetY: -10,
-                      opacity: 1
+                      color: '#26a641',
+                      // shadowBlur: 25,
+                      // shadowColor: '#00224a',
+                      // shadowOffsetX: 0,
+                      // shadowOffsetY: -10,
+                      opacity: 0.5
                     }
                   }
                 }
-              ]
+              ],
+              tooltip: {
+                trigger: 'item',
+              }
             },
           ]
         }

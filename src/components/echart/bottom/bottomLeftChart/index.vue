@@ -452,4 +452,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-input--suffix .el-input__inner {
+  padding-right: 30px;
+  background-color: "#0d1117";
+}
 </style>

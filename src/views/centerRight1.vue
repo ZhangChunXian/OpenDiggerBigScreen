@@ -3,7 +3,7 @@
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
         <div class="d-flex">
-          <span style="font-size: 0.8rem">贡献者列表</span>
+          <span style="font-size: 0.9rem; font-weight: bold">贡献者列表</span>
         </div>
       </div>
       <div class="d-flex jc-center body-box">

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- 年度开工率 -->
     <Echart
       :options="options"
       id="bottomLeftChart"

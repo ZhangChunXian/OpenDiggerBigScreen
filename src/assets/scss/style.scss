@@ -1,5 +1,24 @@
 @import "./variables";
 
+$--color-primary: #0d1117;
+
+.el-input__inner  {
+  background-color: #0d1117;
+}
+
+.el-input--suffix .el-input__inner {
+  padding-right: 30px;
+  background-color: #0d1117;
+}
+.el-scrollbar {
+  overflow: hidden;
+  position: relative;
+  background-color: #21262c;
+}
+
+.el-select-dropdown__item:hover {
+  color: #21262c;
+}
 //  全局样式
 * {
   margin: 0;

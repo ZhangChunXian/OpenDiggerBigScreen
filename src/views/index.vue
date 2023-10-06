@@ -39,7 +39,7 @@
             <div class="react-right bg-color-blue mr-3">
               <span class="text fw-b">{{this.$store.state.currentRepository}}</span>
             </div>
-            <div class="react-right mr-4 react-l-s">
+            <div class="react-right mr-4 react-l-s" style="display: flex; align-items: center; justify-content: flex-end;">
 <!--              <span class="react-after"></span>-->
 <!--              <span class="text">-->
 <!--                <el-select-->
@@ -58,16 +58,18 @@
 <!--                </el-select>-->
 <!--                </span-->
 <!--              >-->
-              <span class="react-after"></span>
-              <span class="text">
+              <!-- <span class="react-after"></span> -->
+              <span class="text" style="padding-right: 30px; transform: skewX(45deg);">
                 <el-row>
-                  <el-col :span="12">
+                  <el-col :span="24">
                     <el-autocomplete
                         v-model="state1"
+                        prefix-icon="el-icon-search"
                         :fetch-suggestions="querySearch"
-                        placeholder="请输入内容"
+                        placeholder="请输入仓库名"
                         @select="handleSelect"
                         @change="handleSelect"
+                        clearable
                     ></el-autocomplete>
                   </el-col>
                 </el-row>

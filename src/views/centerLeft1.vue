@@ -6,7 +6,7 @@
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span style="font-size: 0.8rem">项目语言构成</span>
+          <span style="font-size: 0.9rem; font-weight: bold;">项目语言构成</span>
           <dv-decoration-3 class="dv-dec-3" />
         </div>
       </div>
