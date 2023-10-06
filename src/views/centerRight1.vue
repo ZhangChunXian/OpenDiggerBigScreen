@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       config: {
-        header: ['序号', '月份', '贡献人'],
+        header: [ '月份', '贡献人'],
         data: [
           [
             "2023-03",

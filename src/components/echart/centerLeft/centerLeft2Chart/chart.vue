@@ -34,8 +34,15 @@ export default {
             show: true,
             formatter: function (params) {
             let value = parseFloat(params.value).toFixed(1);
-            return `${params.name}: ${value}`;
-        }
+            return `${params.name}贡献值: ${value}`;
+            }
+          },
+          grid: {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            containLabel: true // 包含坐标轴标签在内
           },
           series: [
             {
