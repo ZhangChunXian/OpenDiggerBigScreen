@@ -1,9 +1,11 @@
 <template>
   <div>
-    <el-select v-model="cdata.year" filterable placeholder="请选择年份" @input="filterYear()">
-      <el-option v-for="item in years" :key="item" :value="item">
-      </el-option>
-    </el-select>
+    <el-tooltip class="item" effect="dark" content="选择年份, 查看年份活跃值热力图. 雷达图可查看项目全年总活跃值" placement="top">
+      <el-select v-model="cdata.year" filterable placeholder="请选择年份" @input="filterYear()">
+        <el-option v-for="item in years" :key="item" :value="item">
+        </el-option>
+      </el-select>
+    </el-tooltip>
     <Chart :cdata="cdata" />
   </div>
 </template>

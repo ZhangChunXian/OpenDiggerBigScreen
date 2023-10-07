@@ -2,9 +2,11 @@
   <div id="centerRight1">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
-        <div class="d-flex">
-          <span style="font-size: 0.9rem; font-weight: bold">贡献者列表</span>
-        </div>
+        <el-tooltip class="item" effect="dark" content="贡献者列表, 排名不分先后" placement="top">
+          <div class="d-flex">
+              <span style="font-size: 0.9rem; font-weight: bold">贡献者列表</span>
+          </div>
+        </el-tooltip>
       </div>
       <div class="d-flex jc-center body-box">
         <dv-scroll-board class="dv-scr-board" :config="config" />

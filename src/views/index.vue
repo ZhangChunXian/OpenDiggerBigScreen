@@ -60,19 +60,21 @@
 <!--              >-->
               <!-- <span class="react-after"></span> -->
               <span class="text" style="padding-right: 30px; transform: skewX(45deg);">
-                <el-row>
-                  <el-col :span="24">
-                    <el-autocomplete
-                        v-model="state1"
-                        prefix-icon="el-icon-search"
-                        :fetch-suggestions="querySearch"
-                        placeholder="请输入仓库名"
-                        @select="handleSelect"
-                        @change="handleSelect"
-                        clearable
-                    ></el-autocomplete>
-                  </el-col>
-                </el-row>
+                <el-tooltip class="item" effect="dark" content="输入格式: Github用户名/仓库名. 支持查询未在候选列表的仓库" placement="top">
+                  <el-row>
+                    <el-col :span="24">
+                      <el-autocomplete
+                          v-model="state1"
+                          prefix-icon="el-icon-search"
+                          :fetch-suggestions="querySearch"
+                          placeholder="请输入仓库名"
+                          @select="handleSelect"
+                          @change="handleSelect"
+                          clearable
+                      ></el-autocomplete>
+                    </el-col>
+                  </el-row>
+                </el-tooltip>
               </span>
             </div>
           </div>

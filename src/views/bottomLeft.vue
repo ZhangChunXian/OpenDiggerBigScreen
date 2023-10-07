@@ -5,9 +5,11 @@
         <span>
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
-        <div class="d-flex">
-          <span class="font-size: 0.9rem; font-weight: bold">数据统计图</span>
-        </div>
+        <el-tooltip class="item" effect="dark" content="star, issue, PR统计图" placement="top">
+          <div class="d-flex">
+            <span class="font-size: 0.9rem; font-weight: bold">数据统计图</span>
+          </div>
+        </el-tooltip>
       </div>
       <div>
         <BottomLeftChart />

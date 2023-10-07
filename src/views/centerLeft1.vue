@@ -5,10 +5,12 @@
         <span>
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
-        <div class="d-flex">
-          <span style="font-size: 0.9rem; font-weight: bold;">项目语言构成</span>
-          <dv-decoration-3 class="dv-dec-3" />
-        </div>
+        <el-tooltip class="item" effect="dark" content="Github项目语言比例" placement="top">
+          <div class="d-flex">
+            <span style="font-size: 0.9rem; font-weight: bold;">项目语言构成</span>
+            <dv-decoration-3 class="dv-dec-3" />
+          </div>
+        </el-tooltip>
       </div>
       <div class="d-flex jc-center">
         <CenterLeft1Chart />

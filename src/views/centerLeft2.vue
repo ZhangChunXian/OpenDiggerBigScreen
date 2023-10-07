@@ -6,8 +6,10 @@
           <icon name="chart-pie" class="text-icon"></icon>
         </span>
         <div class="d-flex">
-          <span style="font-size: 0.9rem; font-weight: bold;">贡献者词云</span>
-          <dv-decoration-1 class="dv-dec-1" />
+          <el-tooltip class="item" effect="dark" content="贡献者词云, 文字越大表示贡献值越大" placement="top">
+            <span style="font-size: 0.9rem; font-weight: bold;">贡献者词云</span>
+            <dv-decoration-1 class="dv-dec-1" />
+          </el-tooltip>
         </div>
       </div>
       <div class="d-flex jc-center">

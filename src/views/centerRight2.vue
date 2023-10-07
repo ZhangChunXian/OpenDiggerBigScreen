@@ -2,18 +2,18 @@
   <div id="centerRight2">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
-        <span class="text" style="font-size: 0.9rem; font-weight: bold;">贡献者邮箱</span>
+        <el-tooltip class="item" effect="dark" content="贡献者邮箱统计" placement="top">
+          <span class="text" style="font-size: 0.9rem; font-weight: bold;">贡献者邮箱</span>
+        </el-tooltip>
       </div>
       <div class="d-flex ai-center flex-column body-box">
         <dv-capsule-chart class="dv-cap-chart" :config="config"  />
-        <centerRight2Chart1 />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import centerRight2Chart1 from '@/components/echart/centerRight/centerRightChart'
 import { mapState } from 'vuex'
 import axios from 'axios'
 
@@ -48,7 +48,6 @@ export default {
       }
     }
   },
-  components: { centerRight2Chart1 },
   computed: {
     ...mapState(['currentRepository']),
   },
@@ -83,6 +82,7 @@ export default {
           if (index !== -1) {
             name = name.substring(0, index);
           }
+
 
           if (!result[name]) {
             result[name] = 0;
