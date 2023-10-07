@@ -1,9 +1,66 @@
-# OpenDigger可视化大屏
+<div align="center">
+<h1 >
+  <br/>OpenDigger Big Screen
+</h1>
+![](https://img.shields.io/badge/License-MIT-blue)
+![](https://img.shields.io/badge/Node-v15.14.0-blue)
+[![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)](README-CN.md)
 
-| 课程名称: 云计算                   | 年级: 2020             | 实践成绩          |
-| ---------------------------------- | ---------------------- | ----------------- |
-| 指导教师: 王伟                     | 姓名: 张春贤           | 学号: 10205501451 |
-| 上机实践名称: OpenDigger可视化大屏 | 上机实践时间: 2023.7.1 |                   |
+
+
+![image-20231007225010168](./assets/image-20231007225010168.png)
+
+The Big Screen is developed by Unsupervised Learning Group in [OpenSODA](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) competition.
+
+![image-20231007225345003](./assets/image-20231007225345003.png)
+
+## About this project
+
+An online accessible, interactive visualization screen. Data from X-lab2017/open-digger and Github API.
+
+The project is powered 🚀 by Vue, and is available online at:   [http://open-digger.com/#/](http://open-digger.com/#/)
+
+## How to view ?
+
++ All you need to do is just to type in the address http://open-digger.com/#/ into your browser and you can access it online!
+
+### Docker deployment
+
+1. Install Docker: Make sure Docker is installed on your system. they can follow the instructions in the official documentation: https://docs.docker.com/get-docker/
+
+2. Pull images: You can pull uploaded images from Docker Hub using the following command
+
+   docker image address : https://hub.docker.com/repository/docker/beinvisibling/opendiggerbigscreen/general
+
+      ```bash
+      docker pull beinvisibling/opendiggerbigscreen:latest
+      ```
+
+     This will download and store your image from Docker Hub on their local system.
+
+3. Run the container: you can run your image using the following command:
+
+      ```bash
+      docker run -d -p 8081:8081 your-dockerhub-username/your-image-name
+      ```
+
+      - The `-d` flag indicates to run the container in the background.
+      - The ``-p 8080:3000`` flag maps the container's port 8081 to the host's port 8081.This assumes that your Node.js application is using port 8081 in the container.
+
+4. accessing the application: once the container is running, you can access your Node.js application by going to `http://localhost:8081` in your browser. If you have mapped the container port on another port on the host, you need to change the port number in the URL accordingly.
+
+This way, you will be able to run and access the OpenDigger l big screen application image on their local system. You can use the `docker stop container-id` command, where `container-id` is the ID of the container, which can be viewed using the `docker ps` command.
+
+## The introduction of OpenDigger Big Screen
+
+
+
+
+
+
+
+
+
 
 # 1. 项目简介
 

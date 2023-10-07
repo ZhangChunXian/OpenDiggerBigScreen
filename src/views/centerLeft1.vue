@@ -5,7 +5,7 @@
         <span>
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
-        <el-tooltip class="item" effect="dark" content="Github项目语言比例" placement="top">
+        <el-tooltip class="item" effect="dark" content="Github项目语言比例 数据来源: Github API" placement="top">
           <div class="d-flex">
             <span style="font-size: 0.9rem; font-weight: bold;">项目语言构成</span>
             <dv-decoration-3 class="dv-dec-3" />

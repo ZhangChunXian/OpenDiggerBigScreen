@@ -5,7 +5,7 @@
         <span>
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
-        <el-tooltip class="item" effect="dark" content="star, issue, PR统计图" placement="top">
+        <el-tooltip class="item" effect="dark" content="star, issue, PR统计图 数据来源: X-lab2017/open-digger" placement="top">
           <div class="d-flex">
             <span class="font-size: 0.9rem; font-weight: bold">数据统计图</span>
           </div>

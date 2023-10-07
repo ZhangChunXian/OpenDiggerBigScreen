@@ -2,7 +2,7 @@
   <div id="centerRight1">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
-        <el-tooltip class="item" effect="dark" content="贡献者列表, 排名不分先后" placement="top">
+        <el-tooltip class="item" effect="dark" content="贡献者列表, 排名不分先后 数据来源: X-lab2017/open-digger" placement="top">
           <div class="d-flex">
               <span style="font-size: 0.9rem; font-weight: bold">贡献者列表</span>
           </div>

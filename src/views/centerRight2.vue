@@ -2,7 +2,7 @@
   <div id="centerRight2">
     <div class="bg-color-black">
       <div class="d-flex pt-2 pl-2">
-        <el-tooltip class="item" effect="dark" content="贡献者邮箱统计" placement="top">
+        <el-tooltip class="item" effect="dark" content="贡献者邮箱统计 数据来源: X-lab2017/open-digger" placement="top">
           <span class="text" style="font-size: 0.9rem; font-weight: bold;">贡献者邮箱</span>
         </el-tooltip>
       </div>

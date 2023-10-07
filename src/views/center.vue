@@ -11,7 +11,7 @@
     <div class="down">
       <div class="ranking bg-color-black">
         <el-tooltip class="item" effect="dark" content="有关OpenRank, 请查看
-https://sourl.cn/9xTTGW" placement="top">
+https://sourl.cn/9xTTGW 数据来源: X-lab2017/open-digger" placement="top">
           <span style="font-size: 0.9rem; font-weight: bold;">OpenRank变化趋势</span>
         </el-tooltip>
         <Echart :options="options"  style="height: 100%;"/>
