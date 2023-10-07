@@ -14,17 +14,17 @@
 
 OpenDigger可视化大屏由 无监督学习队, 该项目是[OpenSODA](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45)大赛的决赛作品
 
-![image-20231007225345003](./assets/image-20231007225345003.png)
-
 ## 关于本项目
 
 一个在线可访问, 可交互的可视化大屏. 数据来源于[X-lab2017/open-digger](https://github.com/X-lab2017/open-digger) 与 [Github API](https://docs.github.com/en/rest)
 
 该项目由Vue支持, 在线访问地址:  [http://open-digger.com/#/](http://open-digger.com/#/)
 
-你只需要在浏览器输入地址 http://open-digger.com/#/ , 即可在线访问
-
 ## 怎么查看OpenDigger 可视化大屏?
+
+### 演示视频
+
+https://www.bilibili.com/video/BV1Nh4y1r7Gt/
 
 + 你只需要在浏览器输入地址 http://open-digger.com/#/ , 即可在线访问
 
@@ -54,6 +54,35 @@ OpenDigger可视化大屏由 无监督学习队, 该项目是[OpenSODA](https://
 4. 访问应用程序：一旦容器正在运行，你就可以通过在浏览器中访问 `http://localhost:8081` 来访问您的Node.js应用程序。如果你在主机的其他端口上映射了容器端口，你需要相应地更改URL中的端口号。
 
 这样，你就可以在他们的本地系统上运行和访问OpenDigger可视化大屏应用程序镜像了。可以使用 `docker stop container-id` 命令，其中 `container-id` 是容器的ID，可以使用 `docker ps` 命令查看。
+
+### Github 仓库克隆
+
+地址: https://github.com/ZhangChunXian/OpenDiggerBigScreen
+
+得益于OpenDigger可视化大屏的高质量和本人在社交媒体上不遗余力的宣传, 目前star来到了55个!
+
+![image-20231008005455095](./assets/image-20231008005455095.png)
+
++ 克隆github仓库到本地
+
+  ```bash
+  git clone https://github.com/ZhangChunXian/OpenDiggerBigScreen.git
+  ```
+
++ npm 安装包, 推荐node版本为15.14.0
+
+  ```bash
+  cd OpenDiggerBigScreen
+  npm install
+  ```
+
++ npm运行, 默认8080端口
+
+  ```bash
+  npm run serve 
+  ```
+
+  
 
 
 
@@ -186,6 +215,3 @@ openRank是由OpenDigger独创的开源项目指标, 本大屏把它的变化趋
 ### 比赛收获
 
 收获了一个完整的可视化项目经验, 从头到尾规划了如何更好的展示开源项目, 为开源助力
-
-### 演示视频
-

@@ -2,17 +2,17 @@
 <h1 >
   <br/>OpenDigger Big Screen
 </h1>
+
+
+
 ![](https://img.shields.io/badge/License-MIT-blue)
 ![](https://img.shields.io/badge/Node-v15.14.0-blue)
 [![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)](README-CN.md)
 
 
-
 ![image-20231007225010168](./assets/image-20231007225010168.png)
 
 The Big Screen is developed by Unsupervised Learning Group in [OpenSODA](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) competition.
-
-![image-20231007225345003](./assets/image-20231007225345003.png)
 
 ## About this project
 
@@ -21,6 +21,10 @@ An online accessible, interactive visualization screen. Data from X-lab2017/open
 The project is powered 🚀 by Vue, and is available online at:   [http://open-digger.com/#/](http://open-digger.com/#/)
 
 ## How to view ?
+
+### Demo video
+
+https://www.bilibili.com/video/BV1Nh4y1r7Gt/
 
 + All you need to do is just to type in the address http://open-digger.com/#/ into your browser and you can access it online!
 
@@ -51,179 +55,160 @@ The project is powered 🚀 by Vue, and is available online at:   [http://open-d
 
 This way, you will be able to run and access the OpenDigger l big screen application image on their local system. You can use the `docker stop container-id` command, where `container-id` is the ID of the container, which can be viewed using the `docker ps` command.
 
-## The introduction of OpenDigger Big Screen
+### Github repository clone
 
+Address: https://github.com/ZhangChunXian/OpenDiggerBigScreen
 
+Thanks to the high quality of the OpenDigger visualization and my social media campaigns, the star is now at 55 !
 
+![image-20231008005455095](./assets/image-20231008005455095.png)
 
++ Clone the github repository locally
 
+  ```bash
+  git clone https://github.com/ZhangChunXian/OpenDiggerBigScreen.git
+  
 
++ npm installs the package, node version 15.14.0 is recommended.
 
+  ```bash
+  cd OpenDiggerBigScreen
+  npm install
+  ```
 
++ npm to run on port 8080 by default.
 
+  ```bash
+  npm run serve 
+  ```
 
-# 1. 项目简介
+## Introduction to the OpenDigger Visualization Screen
 
-本项目使用了OpenDigger官方的数据集top300_metrics(前300流行项目指标数据), 云存储技术, 容器技术, 云主机在线部署技术, 多项技术共同完成了一个有关OpenDigger的可视化大屏
+### Scenario and meaning
 
+The world needs open source, open source needs to be seen by more people, more people to participate in open source. This project jumps out of the general sense of open source from the code point of view, choose from the visual angle easier for the public to understand and receive, to attract the attention of the audience, from the perspective of the visualization of the big screen to promote open source, easier for ordinary people to understand and accept. Because ordinary people, even if they do not know code and programming, can participate in open source.
 
+### Realization
 
-项目地址: http://81.69.3.48:8080/#/ 
+The data of this big screen comes from 
 
-docker镜像地址: https://hub.docker.com/repository/docker/beinvisibling/opendiggerbigscreen 
+- [X-lab2017](https://github.com/X-lab2017)
+- [Github API](https://docs.github.com/en/rest)
 
-# 2 项目介绍
+Technology stack: Vue 2.6 Echarts 5.3 RestFul API
 
-## 2.1 项目概览
+### Description of the work
 
-整个大屏的缩略图如下
+The thumbnail of the whole big screen is as follows, including some dynamic actions
 
-![image-20230715232502739](./images/image-20230715232502739.png)
+![GIF 10-7-2023 11-22-44 PM](./assets/GIF 10-7-2023 11-22-44 PM.gif)
 
-可以看出, 整个项目看上去十分酷炫, 图表众多, 且每个图表都与开源项目和数据集之间有联系
+### Characteristics of the work
 
+#### Data from a wide range of sources
 
+The data for this large screen comes from 
 
-## 2.2 项目特色
+- [X-lab2017](https://github.com/X-lab2017)
+- [Github API](https://docs.github.com/en/rest)
 
-### 2.2.1 动态查询交互
+The API of X-Lab2017 contains information about a wide variety of open source projects, as follows
 
+![image-20231007232555038](./assets/image-20231007232555038.png)
 
+The Github API also allows you to find additional information, such as a map of the project's language distribution.
 
-## 网站是动态可变, 有交互的!
+#### Dynamic Interactive Queries
 
-## 网站是动态可变, 有交互的!
+## Websites are dynamic and interactive!
 
-## 网站是动态可变, 有交互的!
+## Websites are dynamically variable and interactive!
 
-不同于一般的可视化大屏, 本项目是可以进行查询的, 基于top300_metrics(前300流行项目指标数据), 我们可以根据项目组织和项目名称进行项目查询
+## Websites are dynamic and interactive!
 
-下面是一般查询的截图
+Unlike the general visualization of the big screen, this project can be queried , according to different open source projects to show different interfaces , we can according to the project author and project name of the project memory visualization query .
 
-![image-20230715232756904](./images/image-20230715232756904.png)
+The query action is as follows
 
-输入查询后, 比如查询angular/components, 即可跳出专属于angular/components项目的大屏
+![GIF 10-7-2023 11-28-05 PM](./assets/GIF 10-7-2023 11-28-05 PM.gif)
 
-![image-20230715232822326](./images/image-20230715232822326.png)
+Entering a query, such as **apache/arrow** , will switch the chart from the other repository.
 
-并且在每个项目下可以查询对应年份的活跃度
+![image-20231007232936763](./assets/image-20231007232936763.png)
 
-2016年angular/components活跃度
+And under each project you can check the activity for the corresponding year
 
-![image-20230715232938560](./images/image-20230715232938560.png)
+**apache/arrow** activity in 2016
 
-2017年angular/components活跃度
+![image-20231007233026073](./assets/image-20231007233026073.png)
 
-![image-20230715233005903](./images/image-20230715233005903.png)
+**apache/arrow** activity in 2017
 
-## 2.2.2 轻松部署
+![image-20231007233104184](./assets/image-20231007233104184.png)
 
-本项目由github仓库 https://github.com/ZhangChunXian/OpenDiggerBigScreen
+#### Interactive charts
 
-docker镜像 https://hub.docker.com/repository/docker/beinvisibling/opendiggerbigscreen/general
+Each chart, when you mouse over it, can be operated, such as wave scrolling, list scrolling, value display, zoom, etc.
 
-docker拉取镜像
+![image-20231007233156990](./assets/image-20231007233156990.png)
 
-```docker
-docker pull beinvisibling/opendiggerbigscreen:latest
-```
+![image-20231007233203755](./assets/image-20231007233203755.png)
 
+![image-20231007233208460](./assets/image-20231007233208460.png)
 
+### Graphical interpretation
 
-### 2.2.3 图表可交互
+#### **Project Language Composition**
 
-每一个图表, 在鼠标划过去的时候都是可以有运行的, 如波浪滚动, 列表滚动, 数值显示, 放大等.
+You can find out the language composition of a project by querying the Github API to get a basic understanding of the project's technology stack.
 
-![image-20230715233249002](./images/image-20230715233249002.png)
+![image-20231007233314969](./assets/image-20231007233314969.png)
 
-![image-20230715233302154](./images/image-20230715233302154.png)
+#### Contributor Word Cloud
 
-![image-20230715233308612](./images/image-20230715233308612.png)
+You can view the word cloud to understand the contribution of the open source big brother, the larger the word means more contributions
 
-### 2.2.4 云存储技术
+![image-20231007233354368](./assets/image-20231007233354368.png)
 
-本项目的数据都不是在本地,而是存储在腾讯云oss中, 这不仅保障了存储的速度, 还保障了存储的稳定性和安全性. 
+#### Project Information
 
-![image-20230715233610060](./images/image-20230715233610060.png)
+Check your project's star, fork, participants, issue, and contributors.
 
-## 2.3 图表解释
+![image-20231007233409024](./assets/image-20231007233409024.png)
 
-### 2.3.1 footer
+#### OpenRank Trends
 
-![image-20230715233639994](./images/image-20230715233639994.png)
+openRank is an open source project metric created by OpenDigger, and this screen shows its trend.
 
-footer表示网站主题 OpenDigger可视化大屏, 并标明版权, 右面有搜索框
+![image-20231007233536784](./assets/image-20231007233536784.png)
 
+#### Contributor Email
 
+Through the list of contributors' e-mail, you can find out some information about the nationality of the contributors. For example, gmail is usually for Europeans and Americans, 163 and qq are usually for Chinese.
 
-### 2.3.1 饼图
+![image-20231007233621208](./assets/image-20231007233621208.png)
 
-![image-20230715233713646](./images/image-20230715233713646.png)
+#### List of contributors
 
-饼图描述了非活跃非活跃贡献者和活跃贡献者的比例和数量
+Check out the list of contributing bigwigs! And it's a scrolling list!
 
+![image-20231007233649140](./assets/image-20231007233649140.png)
 
+#### Statistic Chart
 
-### 2.3.2 贡献者词云
+From the star, fork and issue additions perspective, to see the popularity of an open source project, the higher the three the more popular!
 
-![image-20230715233830994](./images/image-20230715233830994.png)
+![image-20231007233701035](./assets/image-20231007233701035.png)
 
-贡献者词云描述了贡献者的情况, 字越大说明贡献越多
+#### Annual Activity Map
 
+Imitate Github heatmap, open to see the project's update status!
 
+Radar chart to see the annual activity of the project, so you can better understand the open source project!
 
-### 2.3.3 项目基本信息
+![image-20231007233821548](./assets/image-20231007233821548.png)
 
-![image-20230715233908683](./images/image-20230715233908683.png)
+### Competition Takeaways
 
-累计star, 累计fork, 累计参与人数, PR, issue和贡献者
+Gained a complete visualization project experience, from start to finish, planning how to better present the open source project, to help open source.
 
-### 2.3.4 OpenRank值列表和水球图
-
-![image-20230715233936205](./images/image-20230715233936205.png)
-
-列表列出了Openrank值最高的项目前20, 而水球图描述了项目的openRank排名, 如这个项目排名在86%
-
-
-
-### 2.3.4 贡献者邮箱胶囊图
-
-![image-20230715234037786](./images/image-20230715234037786.png)
-
-贡献者邮箱胶囊图描述了贡献者使用的邮箱情况
-
-
-
-### 2.3.5 贡献者列表胶囊图
-
-![image-20230715234120396](./images/image-20230715234120396.png)
-
-从前到后列出贡献者
-
-
-
-### 2.3.6 新增fork数量, star, 和issue数量折线图/柱状图
-
-![image-20230715234152981](./images/image-20230715234152981.png)
-
-描述项目自成立以来新增fork, issue和star的情况, 三个放在一起比信息量更大, 更加容易得出结论
-
-
-
-### 2.3.7 年度活跃值热力图和雷达图
-
-![image-20230715234234363](./images/image-20230715234234363.png)
-
-![image-20230715234241360](./images/image-20230715234241360.png)
-
-热力图模仿了github的提交热力图, 描述了改项目在某年的提交情况, 灰色表示没有提交, 绿色颜色越深表示提交越多.
-
-雷达图对比了从项目成立以来每年的活跃值, 放在一起对比
-
-此外, 热力图支持交互, 输入不同年份, 返回对应的年份热力图
-
-
-
-
-
-感谢助教和老师!!
