@@ -2,6 +2,8 @@
 <h1 >
   <br/>OpenDigger Big Screen
 </h1>
+    </div>
+
 
 
 
