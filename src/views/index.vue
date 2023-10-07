@@ -202,6 +202,8 @@ export default {
       };
     },
     handleSelect(item) {
+      console.log("handleSelect", item)
+      console.log("typeOfItem", typeof item)
       if(typeof item == 'string') {
         if (this.state1) {
           if (this.checkRepoValidity(this.state1)) {
@@ -213,10 +215,14 @@ export default {
       }
     },
     checkRepoValidity(link) {
-      axios.get(`https://oss.x-lab.info/open_digger/github/` + link)
+      return axios.get(`https://oss.x-lab.info/open_digger/github/` + link + '/stars.json')
           .then(response => {
-            console.log('Valid repository:', response.data);
-            return 1;
+            if (response.status === 200) {
+              return 1;
+            } else {
+              this.$message.error('您输入的仓库名无效, 请检查后重新输入');
+              return 0;
+            }
           })
           .catch(() => {
             this.$message.error('您输入的仓库名无效, 请检查后重新输入');

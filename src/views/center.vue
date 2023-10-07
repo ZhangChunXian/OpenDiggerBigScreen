@@ -894,8 +894,6 @@ export default {
 
       openrankMonth.pop();
       openrankValues.pop();
-      console.log("openrankMonth", openrankMonth)
-      console.log("openrankValues", openrankValues)
       this.options = {
         backgroundColor: "#0e1325",
 

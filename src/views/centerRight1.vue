@@ -7583,7 +7583,6 @@ export default {
         align: ['center'],
         carousel: 'single'
       }
-      console.log(config);
       return config
     }
   }

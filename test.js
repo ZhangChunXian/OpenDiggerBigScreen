@@ -11,7 +11,6 @@ async function getRepoInfo(owner, repo) {
         const response = await axios.get(`https://api.github.com/repos/${owner}/${repo}/languages`, {
             httpsAgent: agent
         });
-        console.log(response.data);
     } catch (error) {
         console.error("Error fetching repo info:", error);
     }
