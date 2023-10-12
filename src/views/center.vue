@@ -889,9 +889,17 @@ export default {
 
       let openrankResponse = await axios.get(path + '/openrank.json');
       let openrankData = await openrankResponse.data;
-      let openrankMonth = Object.keys(openrankData)
-      let openrankValues = Object.values(openrankData)
+      const datePattern = /^\d{4}-(0[1-9]|1[0-2])$/;
+      let filteredDatas = {};
+      for (const key in openrankData) {
+        if (datePattern.test(key)) {
+          filteredDatas[key] = openrankData[key];
+        }
+      }
 
+      let openrankMonth = Object.keys(filteredDatas)
+      let openrankValues = Object.values(filteredDatas)
+      
       openrankMonth.pop();
       openrankValues.pop();
       this.options = {
@@ -957,6 +965,7 @@ export default {
           height: 30,
           xAxisIndex: [0],
           bottom: 18,
+          
 
           "start": 75,
           "end": 100,
@@ -976,7 +985,8 @@ export default {
           show: true,
           height: 15,
           start: 1,
-          end: 35
+          end: 35,
+          minSpan: 20,
         }],
         series: [
           {
