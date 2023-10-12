@@ -412,12 +412,26 @@ export default {
   },
   methods: {
     async fetchData(path) {
+      const datePattern = /^\d{4}-(0[1-9]|1[0-2])$/;
+      const filterData = (datas) => {
+        let filteredDatas = {};
+        for (const key in datas) {
+          if (datePattern.test(key)) {
+            filteredDatas[key] = datas[key];
+          }
+        }
+        return filteredDatas;
+      }
+      
       let starResponse = await axios.get(path + '/stars.json');
       let starData = await starResponse.data;
+      starData = filterData(starData);
       let forkResponse = await axios.get(path + '/technical_fork.json');
       let forkData = await forkResponse.data;
+      forkData = filterData(forkData);
       let issueResponse = await axios.get(path + '/issues_new.json');
       let issueData = await issueResponse.data;
+      issueData = filterData(issueData);
 
       // 获取所有的键
       let starKeys = Object.keys(starData);
