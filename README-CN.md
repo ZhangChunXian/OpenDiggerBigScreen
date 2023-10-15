@@ -11,7 +11,7 @@
 [![](https://img.shields.io/badge/English-green)](README.md)
 
 
-![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008134723.png)
+![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016020730.png)
 
 OpenDigger可视化大屏由 无监督学习队, 该项目是[OpenSODA](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45)大赛的决赛作品
 
@@ -60,9 +60,9 @@ https://www.bilibili.com/video/BV1Nh4y1r7Gt/
 
 地址: https://github.com/ZhangChunXian/OpenDiggerBigScreen
 
-得益于OpenDigger可视化大屏的高质量和本人在社交媒体上不遗余力的宣传, 目前star来到了55个!
+得益于OpenDigger可视化大屏的高质量和本人在社交媒体上不遗余力的宣传, 目前star来到了81个!
 
-![image-20231008005455095](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141215.png)
+![image-20231008005455095](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021349.png)
 
 + 克隆github仓库到本地
 
@@ -82,9 +82,6 @@ https://www.bilibili.com/video/BV1Nh4y1r7Gt/
   ```bash
   npm run serve 
   ```
-
-  
-
 
 
 ## OpenDigger可视化大屏介绍
@@ -135,11 +132,11 @@ https://www.bilibili.com/video/BV1Nh4y1r7Gt/
 
 查询的动作如下
 
-![GIF 10-7-2023 11-28-05 PM](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141232.gif)
+![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021040.gif)
 
-输入查询后, 比如查询**apache/arrow**项目, 就会从其他仓库的图表切换过来.
+输入查询后, 比如查询**angular/angular**项目, 就会从其他仓库的图表切换过来.
 
-![image-20231007232936763](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141235.png)
+![image-20231007232936763](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021623.png)
 
 并且在每个项目下可以查询对应年份的活跃度
 
@@ -169,11 +166,11 @@ https://www.bilibili.com/video/BV1Nh4y1r7Gt/
 
 ![image-20231007233314969](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141255.png)
 
-#### 贡献者词云
+#### 仓库网络
 
-可以通过查看词云来了解各位开源大佬的贡献情况, 字越大代表贡献越多
+通过仓库网络可以查看当前仓库与其他仓库的联系, 体现github开源社区火热的合作氛围. 通过较大的点和连接值可以找到当前仓库的最相关仓库.
 
-![image-20231007233354368](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141306.png)
+![image-20231007233354368](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016022034.png)
 
 #### 项目基本信息一览
 

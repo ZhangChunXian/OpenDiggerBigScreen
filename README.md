@@ -12,7 +12,7 @@
 [![](https://img.shields.io/badge/%E7%AE%80%E4%BD%93%E4%B8%AD%E6%96%87-green)](README-CN.md)
 
 
-![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008134723.png)
+![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016020730.png)
 
 The Big Screen is developed by Unsupervised Learning Group in [OpenSODA](https://competition.atomgit.com/competitionInfo?id=bc6603e0b8bf11ed804e6b78b4426d45) competition.
 
@@ -61,16 +61,15 @@ This way, you will be able to run and access the OpenDigger l big screen applica
 
 Address: https://github.com/ZhangChunXian/OpenDiggerBigScreen
 
-Thanks to the high quality of the OpenDigger visualization and my social media campaigns, the star is now at 55 !
+Thanks to the high quality of the OpenDigger visualization and my social media campaigns, the star is now at 81 !
 
-![image-20231008005455095](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141215.png)
+![image-20231008005455095](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021349.png)
 
 + Clone the github repository locally
 
   ```bash
   git clone https://github.com/ZhangChunXian/OpenDiggerBigScreen.git
   
-
 + npm installs the package, node version 15.14.0 is recommended.
 
   ```bash
@@ -103,7 +102,7 @@ Technology stack: Vue 2.6 Echarts 5.3 RestFul API
 
 The thumbnail of the whole big screen is as follows, including some dynamic actions
 
-![GIF 10-7-2023 11-22-44 PM](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141224.gif)
+![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021040.gif)
 
 ### Characteristics of the work
 
@@ -132,11 +131,11 @@ Unlike the general visualization of the big screen, this project can be queried 
 
 The query action is as follows
 
-![GIF 10-7-2023 11-28-05 PM](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141232.gif)
+![](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021040.gif)
 
-Entering a query, such as **apache/arrow** , will switch the chart from the other repository.
+Entering a query, such as **angular/angular** , will switch the chart from the other repository.
 
-![image-20231007232936763](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141235.png)
+![image-20231007232936763](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016021623.png)
 
 And under each project you can check the activity for the corresponding year
 
@@ -184,11 +183,10 @@ openRank is an open source project metric created by OpenDigger, and this screen
 
 ![image-20231007233536784](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141317.png)
 
-#### Contributor Email
+### Repository Network
+The repository network allows you to see how your repository is connected to other repositories, reflecting the collaborative atmosphere of the github open source community. You can find the most relevant repositories to your current repository by looking at larger points and connections.
 
-Through the list of contributors' e-mail, you can find out some information about the nationality of the contributors. For example, gmail is usually for Europeans and Americans, 163 and qq are usually for Chinese.
-
-![image-20231007233621208](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/08/20231008141322.png)
+![image-20231007233621208](https://markdown-picture-1302861826.cos.ap-shanghai.myqcloud.com/img/2023/10/16/20231016022034.png)
 
 #### List of contributors
 
