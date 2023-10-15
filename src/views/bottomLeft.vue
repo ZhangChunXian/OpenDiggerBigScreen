@@ -1,13 +1,14 @@
 <template>
   <div id="bottomLeft">
     <div class="bg-color-black">
-      <div class="d-flex pt-2 pl-2">
+      <div class="d-flex pt-2 pl-2"  style="display: flex; align-items: center;" >
         <span>
           <icon name="chart-bar" class="text-icon"></icon>
         </span>
         <el-tooltip class="item" effect="dark" content="star, issue, PR统计图 数据来源: X-lab2017/open-digger" placement="top">
-          <div class="d-flex">
-            <span class="font-size: 0.9rem; font-weight: bold">数据统计图</span>
+          <div class="d-flex" >
+            <span class="font-size: 0.9rem; font-weight: bold" >数据统计图</span>
+            <dv-decoration-3 class="dv-dec-3" />
           </div>
         </el-tooltip>
       </div>

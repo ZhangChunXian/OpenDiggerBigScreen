@@ -8,7 +8,7 @@
         <div class="d-flex">
           <el-tooltip class="item" effect="dark" content="贡献者词云, 文字越大表示贡献值越大 数据来源: X-lab2017/open-digger" placement="top">
             <span style="font-size: 0.9rem; font-weight: bold;">贡献者词云</span>
-            <dv-decoration-1 class="dv-dec-1" />
+            <dv-decoration-3 class="dv-dec-3" />
           </el-tooltip>
         </div>
       </div>
@@ -39,6 +39,7 @@ export default {
   .bg-color-black {
     height: $box-height - 30px;
     border-radius: 10px;
+    background-color: rgb(12, 17, 33);
   }
   .text {
     color: #c3cbde;

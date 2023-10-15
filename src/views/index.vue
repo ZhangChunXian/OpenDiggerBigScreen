@@ -202,8 +202,6 @@ export default {
       };
     },
     handleSelect(item) {
-      console.log("handleSelect", item)
-      console.log("typeOfItem", typeof item)
       if(typeof item == 'string') {
         if (this.state1) {
           if (this.checkRepoValidity(this.state1)) {

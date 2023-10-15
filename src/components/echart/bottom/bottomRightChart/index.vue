@@ -14340,14 +14340,12 @@ export default {
       let year = '';
 
       const datePattern = /^\d{4}-(0[1-9]|1[0-2])$/;
-      // console.log('datas', datas);
       let filteredDatas = {};
       for (const key in datas) {
         if (datePattern.test(key)) {
           filteredDatas[key] = datas[key];
         }
       }
-      console.log('filteredDatas', filteredDatas);
       datas = filteredDatas
       
 

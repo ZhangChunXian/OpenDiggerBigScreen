@@ -141,7 +141,6 @@ export default {
   watch: {
     // currentRepository: {
     //   handler: async function (newVal) {
-    //     console.log("currentRepository", newVal);
     //      // let tmp = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal)
     //      // this.numberData = [
     //      // {
@@ -179,7 +178,6 @@ export default {
     // languages: {
     //   // handler: function (newVal, oldVal) {
     //   //   if (typeof newVal != 'undefined') {
-    //   //     console.log("newVal === oldVal", newVal === oldVal)
     //   //     let input = newVal.seriesData;
     //   //     // 计算总的 value
     //   //     const totalValue = input.reduce((total, item) => total + item.value, 0);

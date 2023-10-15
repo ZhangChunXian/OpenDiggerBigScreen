@@ -6,6 +6,7 @@
           <div class="d-flex">
               <span style="font-size: 0.9rem; font-weight: bold">贡献者列表</span>
           </div>
+
         </el-tooltip>
       </div>
       <div class="d-flex jc-center body-box">
@@ -7549,6 +7550,14 @@ export default {
     },
 
     processData(data) {
+      const datePattern = /^\d{4}-(0[1-9]|1[0-2])$/;
+      let filteredDatas = {};
+      for (const key in data) {
+        if (datePattern.test(key)) {
+          filteredDatas[key] = data[key];
+        }
+      }
+      data = filteredDatas
       let resultArray = [];
 
       // 遍历jsonData的键,即月份

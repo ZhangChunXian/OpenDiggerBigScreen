@@ -27,7 +27,6 @@ export default {
   watch: {
     cdata: {
       handler(newData) {
-
         // 设置点的位置(经纬度)
         this.options = {
           tooltip: {

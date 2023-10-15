@@ -1,24 +1,36 @@
 <template>
   <div id="centerRight2">
-    <div class="bg-color-black">
-      <div class="d-flex pt-2 pl-2">
-        <el-tooltip class="item" effect="dark" content="贡献者邮箱统计 数据来源: X-lab2017/open-digger" placement="top">
-          <span class="text" style="font-size: 0.9rem; font-weight: bold;">贡献者邮箱</span>
-        </el-tooltip>
+    <fullscreen v-model="fullscreen" :teleport="teleport" :page-only="pageOnly">
+      <div class="fullscreen-wrapper">
+        <div className="bg-color-black">
+          <div className="d-flex pt-2 pl-2" style="align-items: center;">
+            <el-tooltip className="item" effect="dark" content="仓库关系图 数据来源: X-lab2017/open-digger" placement="top">
+              <span className="text" style="font-size: 0.9rem; font-weight: bold;">仓库关系图</span>
+            </el-tooltip>
+            <el-button @click="toggle" circle="true" icon="el-icon-full-screen" size="mini"></el-button>
+          </div>
+          <div className="d-flex ai-center flex-column body-box" ref="chartsMax">
+            <!--        <dv-capsule-chart class="dv-cap-chart" :config="config"  />-->
+            <CenterLeft2Index v-show="!fullscreen" :fullscreen="fullscreen"></CenterLeft2Index>
+            <CenterLeft2Index v-show="fullscreen" :fullscreen="fullscreen"></CenterLeft2Index>
+          </div>
+        </div>
       </div>
-      <div class="d-flex ai-center flex-column body-box">
-        <dv-capsule-chart class="dv-cap-chart" :config="config"  />
-      </div>
-    </div>
+    </fullscreen>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import {mapState} from 'vuex'
 import axios from 'axios'
-
+import CenterLeft2Index from "./centerRight2Index.vue";
+import { component } from 'vue-fullscreen'
 
 export default {
+  components: {
+    CenterLeft2Index,
+    fullscreen: component,
+  },
   data() {
     return {
       config: {
@@ -45,7 +57,10 @@ export default {
           }
         ],
         "showValue": true
-      }
+      },
+      fullscreen: false,
+      teleport: true,
+      pageOnly: false,
     }
   },
   computed: {
@@ -55,7 +70,6 @@ export default {
     currentRepository: {
       handler: async function (newVal) {
         this.config = await this.fetchData('https://oss.x-lab.info/open_digger/github/' + newVal);
-        console.log(this.config);
       },
       deep: true
     }
@@ -66,6 +80,9 @@ export default {
       let mailData = mailResponse.data;
 
       return this.processData(mailData);
+    },
+    toggle() {
+      this.fullscreen = !this.fullscreen
     },
 
     processData(data) {
@@ -91,9 +108,9 @@ export default {
         });
       });
       let output = Object.entries(result)
-        .filter(([, value]) => value >= 75)
-        .map(([name, value]) => ({ name, value }))
-        .sort((a, b) => b.value - a.value);
+          .filter(([, value]) => value >= 75)
+          .map(([name, value]) => ({name, value}))
+          .sort((a, b) => b.value - a.value);
 
       const configs = {
         data: output,
@@ -101,7 +118,7 @@ export default {
       };
 
       return configs;
-    }
+    },
   }
 }
 </script>
@@ -134,6 +151,20 @@ export default {
       width: 100%;
       height: 350px;
     }
+  }
+}
+
+.fullscreen-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #0e1325;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .button {
+    margin-bottom: 20px;
   }
 }
 </style>
